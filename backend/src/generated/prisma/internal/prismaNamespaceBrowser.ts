@@ -51,7 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  School: 'School',
+  AcademicYear: 'AcademicYear',
+  Branch: 'Branch',
+  User: 'User',
+  Role: 'Role',
+  Permission: 'Permission',
+  RolePermission: 'RolePermission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -68,4 +74,110 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const SchoolScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  registrationNumber: 'registrationNumber',
+  schoolType: 'schoolType',
+  level: 'level',
+  establishedYear: 'establishedYear',
+  email: 'email',
+  phone: 'phone',
+  website: 'website',
+  address: 'address',
+  logo: 'logo',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type SchoolScalarFieldEnum = (typeof SchoolScalarFieldEnum)[keyof typeof SchoolScalarFieldEnum]
+
+
+export const AcademicYearScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  name: 'name',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status'
+} as const
+
+export type AcademicYearScalarFieldEnum = (typeof AcademicYearScalarFieldEnum)[keyof typeof AcademicYearScalarFieldEnum]
+
+
+export const BranchScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  name: 'name',
+  address: 'address',
+  status: 'status'
+} as const
+
+export type BranchScalarFieldEnum = (typeof BranchScalarFieldEnum)[keyof typeof BranchScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  schoolId: 'schoolId',
+  branchId: 'branchId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  passwordHash: 'passwordHash',
+  roleId: 'roleId',
+  status: 'status'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

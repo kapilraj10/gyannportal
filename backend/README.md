@@ -1,118 +1,121 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# GyannPortal — Backend API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+REST API for the GyannPortal School Management System.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**Stack:** NestJS 12 · TypeScript · Prisma 7 · PostgreSQL (`@prisma/adapter-pg`)
+**Runtime style:** ESM (`"type": "module"`) — relative imports use `.js` suffix.
+**Default port:** 8000 · **Base path:** `/api/v1`
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## Setup
 
 ```bash
-$ npm install
+npm install
+cp .env.example .env    # configure DATABASE_URL, JWT_SECRET, JWT_EXPIRES_IN
+npx prisma migrate dev  # create schema (first run)
+npm run start:dev
 ```
 
-## Compile and run the project
+## Scripts
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run build      # compile with nest build (tsc)
+npm run start:dev  # watch mode
+npm run start:prod # run compiled output
+npm run lint       # oxlint --type-aware
+npm test           # vitest
 ```
 
-## Run tests
+## Configuration (.env)
 
-```bash
-# unit tests
-$ npm run test
+| Variable          | Example                                        | Purpose                |
+| ----------------- | ---------------------------------------------- | ---------------------- |
+| `PORT`            | `8000`                                         | HTTP port              |
+| `DATABASE_URL`    | `postgresql://user:pass@localhost:5432/gyannportal_db` | PostgreSQL DSN |
+| `JWT_SECRET`      | long random string                              | JWT signing secret     |
+| `JWT_EXPIRES_IN`  | `7d`                                            | Token lifetime         |
 
-# e2e tests
-$ npm run test:e2e
+## API Reference
 
-# test coverage
-$ npm run test:cov
+### Health check
+
+`GET /api/v1/health` — returns API + database status.
+
+### Register a school
+
+`POST /api/v1/auth/register-school`
+
+Creates a School, an optional Branch, and the School Admin user in one transaction, then returns a JWT.
+
+```json
+{
+  "schoolName": "Kathmandu Academy",
+  "schoolCode": "KATH-ACAD",
+  "registrationNumber": "1234567",
+  "schoolType": "PRIVATE",
+  "level": "SECONDARY",
+  "establishedYear": 1995,
+  "schoolEmail": "info@kathmanduacademy.edu.np",
+  "phone": "+977-1-4000000",
+  "website": "https://kathmanduacademy.edu.np",
+  "address": "Baneshwor, Kathmandu",
+
+  "adminName": "Ramesh Sharma",
+  "adminEmail": "ramesh.admin@gmail.com",
+  "adminPhone": "+977-98...",
+  "adminPassword": "StrongPass123",
+
+  "branchName": "Main Campus",
+  "branchAddress": "Baneshwor, Kathmandu"
+}
 ```
 
-## Deployment
+**Responses:**
+- `201` — `{ message, accessToken, user: { id, name, email, role, schoolId, school, branch } }`
+- `400` — validation errors (whitelist + DTO rules)
+- `409` — school code or admin email already exists
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Login
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+`POST /api/v1/auth/login`
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```json
+{ "email": "ramesh.admin@gmail.com", "password": "StrongPass123" }
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Checks password, `UserStatus.ACTIVE`, and `SchoolStatus.ACTIVE`. Returns the same shape as register.
 
-## Observability
+`401` for invalid credentials or inactive account/school.
 
-In production applications, observability is essential for understanding how your system behaves, detecting issues early, and maintaining reliable performance.
+### Current user
 
-[NestJS Observe](https://observe.nestjs.com) automatically instruments your NestJS application, giving you deep visibility into your system with minimal setup:
+`GET /api/v1/auth/me`
 
-- **Distributed tracing:** Follow requests across services and understand how they flow through your system.
-- **Waterfall analysis:** Visualize request execution and identify slow operations, bottlenecks, and unexpected delays.
-- **Performance analysis:** Analyze application performance in real time and quickly pinpoint areas that need optimization.
-- **Metrics:** Track key application and infrastructure metrics to understand system health and performance trends.
-- **Logging:** Centralize and correlate logs with traces and other telemetry to make debugging easier.
-- **Error tracking:** Detect errors quickly and investigate their root causes with the surrounding context.
-- **SLA monitoring:** Track service-level objectives and identify when your application is approaching or exceeding defined thresholds.
-- **Alarms and alerts:** Set up alerts for critical errors, performance degradation, SLA violations, and other anomalies so your team can react quickly.
+Requires `Authorization: Bearer <token>`. Returns the authenticated user with role, school, and branch.
 
-This project is already instrumented. Create a free account at [observe.nestjs.com](https://observe.nestjs.com), add an application, and paste the generated app key and secret into the `ObserveModule.forRoot()` call in `src/app.module.ts`.
+## Architecture
 
-The free plan needs no payment details and covers 300,000 events a month. You can also browse the [live demo](https://www.observe-demo.nestjs.com/dashboard) first - the whole dashboard over a busy service's data, with nothing to install.
+```
+src/
+├── main.ts
+├── app.module.ts
+├── app.controller.ts
+├── database/        # DatabaseModule (global) + DatabaseService (PrismaClient + PrismaPg)
+├── generated/prisma # Prisma 7 generated client (committed)
+├── auth/            # controller, service, module, dto/, guards/, strategies/
+└── common/          # @CurrentUser() decorator
+```
 
-## Resources
+## Validation Rules
 
-Check out a few resources that may come in handy when working with NestJS:
+- `ValidationPipe` global: `whitelist`, `forbidNonWhitelisted`, `transform`.
+- `schoolCode` must match `^[A-Za-z0-9_-]+$`, normalized to uppercase.
+- Emails normalized to lowercase; names/fields trimmed.
+- Passwords: min 8 chars, hashed with bcrypt (cost 12).
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Auto-instrument your application with [NestJS Observe](https://observe.nestjs.com). Distributed tracing, metrics, and logging made easy. Error tracking and performance monitoring for your NestJS applications.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Key Implementation Notes
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- **ESM:** every relative import ends in `.js`.
+- **Prisma 7:** import client from `src/generated/prisma/client.js`; enums double as values and types; `Role` is a model type.
+- **@nestjs/passport v12** requires `PassportModule.register({ defaultStrategy: 'jwt' })`.
+- `DatabaseService` extends `PrismaClient` with a `PrismaPg({ connectionString })` adapter.
+- Only `DatabaseModule` is `@Global()`; `AuthModule` is a normal module imported by `AppModule`.

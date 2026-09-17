@@ -9,7 +9,57 @@
 * 🟢 You can import this file directly.
 */
 
+export const SchoolType = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE',
+  COMMUNITY: 'COMMUNITY',
+  OTHER: 'OTHER'
+} as const
+
+export type SchoolType = (typeof SchoolType)[keyof typeof SchoolType]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const SchoolLevel = {
+  PRIMARY: 'PRIMARY',
+  SECONDARY: 'SECONDARY',
+  HIGHER_SECONDARY: 'HIGHER_SECONDARY',
+  COLLEGE: 'COLLEGE',
+  UNIVERSITY: 'UNIVERSITY',
+  OTHER: 'OTHER'
+} as const
+
+export type SchoolLevel = (typeof SchoolLevel)[keyof typeof SchoolLevel]
+
+
+export const SchoolStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SchoolStatus = (typeof SchoolStatus)[keyof typeof SchoolStatus]
+
+
+export const AcademicYearStatus = {
+  UPCOMING: 'UPCOMING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type AcademicYearStatus = (typeof AcademicYearStatus)[keyof typeof AcademicYearStatus]
+
+
+export const BranchStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type BranchStatus = (typeof BranchStatus)[keyof typeof BranchStatus]
+
+
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]

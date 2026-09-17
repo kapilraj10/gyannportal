@@ -6,3 +6,190 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+
+// ================
+// ENUMS
+// ================
+
+enum SchoolType {
+  PUBLIC
+  PRIVATE
+  COMMUNITY
+  OTHER
+}
+
+enum SchoolLevel {
+  PRIMARY
+  SECONDARY
+  HIGHER_SECONDARY
+  COLLEGE
+  UNIVERSITY
+  OTHER
+}
+
+enum SchoolStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum AcademicYearStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+}
+
+enum BranchStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+// ==============================
+// SCHOOL
+// ==============================
+
+model School {
+  id                 String      @id @default(uuid())
+  name               String
+  code               String      @unique
+  registrationNumber String?     @unique @map("registration_number")
+  schoolType         SchoolType? @map("school_type")
+  level              SchoolLevel?
+  establishedYear    Int?        @map("established_year")
+  email              String?
+  phone              String?
+  website            String?
+  address            String?
+  logo               String?
+  status             SchoolStatus @default(ACTIVE)
+  createdAt          DateTime    @default(now()) @map("created_at")
+
+  // Relations
+  academicYears      AcademicYear[]
+  branches           Branch[]
+  users              User[]
+
+  @@map("schools")
+}
+
+// ==============================
+// ACADEMIC YEAR
+// ==============================
+
+model AcademicYear {
+  id        String              @id @default(uuid())
+  schoolId  String              @map("school_id")
+  name      String
+  startDate DateTime            @map("start_date")
+  endDate   DateTime            @map("end_date")
+  status    AcademicYearStatus  @default(UPCOMING)
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@unique([schoolId, name])
+  @@index([schoolId])
+  @@map("academic_years")
+}
+
+// ==============================
+// BRANCH
+// ==============================
+
+model Branch {
+  id       String       @id @default(uuid())
+  schoolId String       @map("school_id")
+  name     String
+  address  String?
+  status   BranchStatus @default(ACTIVE)
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  users User[]
+
+  @@unique([schoolId, name])
+  @@index([schoolId])
+  @@map("branches")
+}
+
+// ==============================
+// USER
+// ==============================
+
+model User {
+  id           String     @id @default(uuid())
+  schoolId     String     @map("school_id")
+  branchId     String?    @map("branch_id")
+  name         String
+  email        String     @unique
+  phone        String?
+  passwordHash String     @map("password_hash")
+  roleId       String     @map("role_id")
+  status       UserStatus @default(ACTIVE)
+
+  // Relations
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  role Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  @@index([schoolId])
+  @@index([branchId])
+  @@index([roleId])
+  @@map("users")
+}
+
+// ==============================
+// ROLE
+// ==============================
+
+model Role {
+  id   String @id @default(uuid())
+  name String @unique
+
+  // Relations
+  users           User[]
+  rolePermissions RolePermission[]
+
+  @@map("roles")
+}
+
+// ==============================
+// PERMISSION
+// ==============================
+
+model Permission {
+  id   String @id @default(uuid())
+  name String @unique
+
+  // Relations
+  rolePermissions RolePermission[]
+
+  @@map("permissions")
+}
+
+// ==============================
+// ROLE ↔ PERMISSION
+// MANY-TO-MANY JOIN TABLE
+// ==============================
+
+model RolePermission {
+  roleId       String @map("role_id")
+  permissionId String @map("permission_id")
+
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}

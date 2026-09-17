@@ -106,7 +106,7 @@ const roles = [
   },
 ];
 
-function RoleCard({ role, index }: { role: typeof roles[0]; index: number }) {
+function RoleCard({ role }: { role: typeof roles[0] }) {
   return (
     <div className={`group relative p-6 rounded-2xl border ${role.borderColor} bg-white hover:${role.bgColor} card-shadow hover:card-shadow-lg transition-all duration-300 hover:-translate-y-1`}>
       <div className={`w-12 h-12 rounded-xl ${role.bgColor} flex items-center justify-center ${role.textColor} mb-5 group-hover:scale-110 transition-transform`}>
@@ -150,8 +150,8 @@ export default function Roles() {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">
-          {roles.map((role, index) => (
-            <RoleCard key={role.title} role={role} index={index} />
+          {roles.map((role) => (
+            <RoleCard key={role.title} role={role} />
           ))}
         </div>
       </div>

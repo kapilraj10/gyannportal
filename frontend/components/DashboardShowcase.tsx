@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -69,8 +70,13 @@ export default function DashboardShowcase() {
               {/* Sidebar */}
               <div className="hidden md:flex flex-col w-56 bg-slate-50 border-r border-slate-100 p-4">
                 <div className="flex items-center gap-2 mb-8">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold">G</div>
-                  <span className="text-sm font-bold text-slate-800">GyannPortal</span>
+                  <Image
+                    src="/logo1.png"
+                    alt="GyannPortal logo"
+                    width={1536}
+                    height={1024}
+                    className="h-7 w-auto object-contain"
+                  />
                 </div>
                 <nav className="space-y-1 flex-1">
                   {[
@@ -167,7 +173,7 @@ export default function DashboardShowcase() {
                         <div key={i} className="flex-1 flex flex-col gap-0.5">
                           <div
                             className="w-full rounded-sm"
-                            style={{ height: `${day.present}%`, background: "linear-gradient(180deg, #1e40af, #0d9488)" }}
+                            style={{ height: `${day.present}%`, background: "linear-gradient(180deg, #2563eb, #14b8a6)" }}
                           />
                           <div className="w-full rounded-sm bg-slate-100" style={{ height: `${day.absent}%` }} />
                         </div>
@@ -223,8 +229,8 @@ export default function DashboardShowcase() {
                   <div className="bg-white rounded-xl border border-slate-100 p-4">
                     <p className="text-sm font-semibold text-slate-700 mb-3">September 2026</p>
                     <div className="grid grid-cols-7 gap-1">
-                      {["S", "M", "T", "W", "T", "F", "S"].map((d) => (
-                        <div key={d} className="text-center text-[10px] font-medium text-slate-400 py-1">{d}</div>
+                      {["S", "M", "T", "W", "T", "F", "S"].map((d, idx) => (
+                        <div key={`${d}-${idx}`} className="text-center text-[10px] font-medium text-slate-400 py-1">{d}</div>
                       ))}
                       {[0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map((day, i) => {
                         const isToday = day === 17;

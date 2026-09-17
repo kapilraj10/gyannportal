@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -45,8 +46,13 @@ function PhoneMockup() {
           {/* App header */}
           <div className="px-5 pb-3">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-[9px] font-bold">G</div>
-              <span className="text-sm font-bold text-slate-800">GyannPortal</span>
+              <Image
+                src="/logo1.png"
+                alt="GyannPortal logo"
+                width={1536}
+                height={1024}
+                className="h-6 w-auto object-contain"
+              />
             </div>
             <p className="text-[10px] text-slate-400">Welcome back, Aarav</p>
           </div>

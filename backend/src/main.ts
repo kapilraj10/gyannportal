@@ -1,10 +1,14 @@
+import 'dotenv/config';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule, ObserveInstrument } from './app.module.js';
+import { AppModule } from './app.module.js';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    instrument: ObserveInstrument,
-  });
-  await app.listen(process.env.PORT ?? 3000);
+  const logger = new Logger('Bootstrap');
+  const app = await NestFactory.create(AppModule);
+  const port = Number(process.env.PORT ?? 3000);
+
+  await app.listen(port);
+  logger.log(`Server running on port ${port}`);
 }
 await bootstrap();

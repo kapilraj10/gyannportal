@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,7 +31,13 @@ function DashboardMockup() {
         {/* Dashboard Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold">G</div>
+            <Image
+              src="/logo1.png"
+              alt="GyannPortal logo"
+              width={1536}
+              height={1024}
+              className="h-8 w-auto object-contain"
+            />
             <div>
               <p className="text-sm font-semibold text-slate-800">GyannPortal Dashboard</p>
               <p className="text-xs text-slate-400">Springfield Academy</p>
@@ -72,7 +79,7 @@ function DashboardMockup() {
                     style={{
                       height: `${h}%`,
                       background: i === 5
-                        ? "linear-gradient(180deg, #1e40af, #0d9488)"
+                        ? "linear-gradient(180deg, #2563eb, #14b8a6)"
                         : "#e2e8f0",
                     }}
                   />

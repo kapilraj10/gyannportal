@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -41,10 +42,15 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold text-sm transition-transform group-hover:scale-105">
-            G
-          </div>
-          <span className="text-xl font-bold tracking-tight text-slate-900">
+          <Image
+            src="/logo1.png"
+            alt="GyannPortal logo"
+            width={1536}
+            height={1024}
+            priority
+            className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+          />
+          <span className="text-xl font-bold tracking-tight text-slate-900 hidden sm:inline">
             Gyan<span className="text-primary-500">n</span>Portal
           </span>
         </Link>

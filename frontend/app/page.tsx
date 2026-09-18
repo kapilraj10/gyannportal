@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
@@ -12,13 +15,33 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import AuthModal from "@/components/AuthModal";
 
 export default function Home() {
+  const [authOpen, setAuthOpen] = useState(false);
+  const [authTab, setAuthTab] = useState<"login" | "register">("login");
+
+  function openLogin() {
+    setAuthTab("login");
+    setAuthOpen(true);
+  }
+
+  function openRegister() {
+    setAuthTab("register");
+    setAuthOpen(true);
+  }
+
   return (
     <div className="relative">
-      <Navbar />
+      <AuthModal
+        key={`${authOpen ? authTab : "closed"}`}
+        open={authOpen}
+        onClose={() => setAuthOpen(false)}
+        initialTab={authTab}
+      />
+      <Navbar onLogin={openLogin} onRegister={openRegister} />
       <main id="main">
-        <Hero />
+        <Hero onRegister={openRegister} />
         <Stats />
         <ProblemSolution />
         <Features />
@@ -29,7 +52,7 @@ export default function Home() {
         <Pricing />
         <Testimonials />
         <FAQ />
-        <CTA />
+        <CTA onRegister={openRegister} />
       </main>
       <Footer />
     </div>

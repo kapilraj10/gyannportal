@@ -1,8 +1,23 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
+/**
+ * Returns the authenticated user attached to the request.
+ *
+ * Supports property access:
+ *   @CurrentUser() user
+ *   @CurrentUser('id')
+ *   @CurrentUser('role')
+ *   @CurrentUser('schoolId')
+ */
 export const CurrentUser = createParamDecorator(
-  (_data: unknown, ctx: ExecutionContext) => {
+  (data: string | undefined, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    return request.user;
+    const user = request.user;
+
+    if (!user) {
+      return data ? undefined : null;
+    }
+
+    return data ? user[data] : user;
   },
 );

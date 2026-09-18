@@ -1,97 +1,86 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-
+import { createHash, randomUUID } from 'node:crypto';
+import type { SignOptions } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import {
   BranchStatus,
-  Role,
   SchoolStatus,
   UserStatus,
 } from '../generated/prisma/client.js';
 
 import { DatabaseService } from '../database/database.service.js';
+import { AuditLogsService } from '../modules/audit-logs/audit-logs.service.js';
+import { AuditAction } from '../common/enums/audit-action.enum.js';
 
 import { RegisterSchoolDto } from './dto/register-school.dto.js';
 import { LoginDto } from './dto/login.dto.js';
+import { ChangePasswordDto } from './dto/change-password.dto.js';
+import { RefreshTokenDto } from './dto/refresh-token.dto.js';
+import { LogoutDto } from './dto/logout.dto.js';
+
+export interface RequestMeta {
+  ipAddress?: string;
+  userAgent?: string;
+}
+
+interface TokenUser {
+  id: string;
+  email: string;
+  schoolId: string;
+  roleId: string;
+  roleName: string;
+}
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: DatabaseService,
     private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+    private readonly auditLogs: AuditLogsService,
   ) {}
 
   // =====================================================
   // REGISTER SCHOOL
   // =====================================================
 
-  async registerSchool(dto: RegisterSchoolDto) {
+  async registerSchool(dto: RegisterSchoolDto, meta: RequestMeta = {}) {
     const normalizedSchoolCode = dto.schoolCode.trim().toUpperCase();
-
     const normalizedAdminEmail = dto.adminEmail.trim().toLowerCase();
 
-    // -----------------------------------------------------
-    // CHECK SCHOOL CODE
-    // -----------------------------------------------------
-
     const existingSchool = await this.prisma.school.findUnique({
-      where: {
-        code: normalizedSchoolCode,
-      },
+      where: { code: normalizedSchoolCode },
     });
 
     if (existingSchool) {
       throw new ConflictException('School code already exists');
     }
 
-    // -----------------------------------------------------
-    // CHECK ADMIN EMAIL
-    // -----------------------------------------------------
-
     const existingUser = await this.prisma.user.findUnique({
-      where: {
-        email: normalizedAdminEmail,
-      },
+      where: { email: normalizedAdminEmail },
     });
 
     if (existingUser) {
       throw new ConflictException('Admin email already exists');
     }
 
-    // -----------------------------------------------------
-    // PASSWORD HASH
-    // -----------------------------------------------------
-
     const passwordHash = await bcrypt.hash(dto.adminPassword, 12);
 
-    // -----------------------------------------------------
-    // TRANSACTION
-    // -----------------------------------------------------
-
     const result = await this.prisma.$transaction(async (tx) => {
-      // ================================================
-      // ROLE
-      // ================================================
-
       const role = await tx.role.upsert({
-        where: {
-          name: 'SCHOOL_ADMIN',
-        },
+        where: { name: 'SCHOOL_ADMIN' },
         update: {},
-        create: {
-          name: 'SCHOOL_ADMIN',
-        },
+        create: { name: 'SCHOOL_ADMIN' },
       });
-
-      // ================================================
-      // SCHOOL
-      // ================================================
 
       const school = await tx.school.create({
         data: {
@@ -109,10 +98,6 @@ export class AuthService {
         },
       });
 
-      // ================================================
-      // BRANCH
-      // ================================================
-
       let branch = null;
 
       if (dto.branchName) {
@@ -126,10 +111,6 @@ export class AuthService {
         });
       }
 
-      // ================================================
-      // USER
-      // ================================================
-
       const user = await tx.user.create({
         data: {
           schoolId: school.id,
@@ -141,52 +122,50 @@ export class AuthService {
           roleId: role.id,
           status: UserStatus.ACTIVE,
         },
-        include: {
-          role: true,
-          school: true,
-          branch: true,
-        },
+        include: { role: true, school: true, branch: true },
       });
 
-      return {
-        school,
-        branch,
-        user,
-        role,
-      };
+      return { school, branch, user, role };
     });
 
-    // -----------------------------------------------------
-    // JWT
-    // -----------------------------------------------------
+    const tokens = await this.issueTokens({
+      id: result.user.id,
+      email: result.user.email,
+      schoolId: result.school.id,
+      roleId: result.role.id,
+      roleName: result.role.name,
+    });
 
-    const token = await this.generateToken(
-      result.user.id,
-      result.user.email,
-      result.school.id,
-      result.role,
-    );
+    await this.auditLogs.log({
+      userId: result.user.id,
+      schoolId: result.school.id,
+      action: AuditAction.SCHOOL_CREATE,
+      entity: 'School',
+      entityId: result.school.id,
+      metadata: { code: result.school.code, name: result.school.name },
+      ipAddress: meta.ipAddress,
+      userAgent: meta.userAgent,
+    });
 
     return {
       message: 'School registered successfully',
-      accessToken: token,
-      user: {
-        id: result.user.id,
-        name: result.user.name,
-        email: result.user.email,
-        role: result.role.name,
-        schoolId: result.school.id,
-        school: {
-          id: result.school.id,
-          name: result.school.name,
-          code: result.school.code,
+      data: {
+        ...tokens,
+        user: {
+          id: result.user.id,
+          name: result.user.name,
+          email: result.user.email,
+          role: result.role.name,
+          schoolId: result.school.id,
+          school: {
+            id: result.school.id,
+            name: result.school.name,
+            code: result.school.code,
+          },
+          branch: result.branch
+            ? { id: result.branch.id, name: result.branch.name }
+            : null,
         },
-        branch: result.branch
-          ? {
-              id: result.branch.id,
-              name: result.branch.name,
-            }
-          : null,
       },
     };
   }
@@ -195,31 +174,17 @@ export class AuthService {
   // LOGIN
   // =====================================================
 
-  async login(dto: LoginDto) {
+  async login(dto: LoginDto, meta: RequestMeta = {}) {
     const email = dto.email.trim().toLowerCase();
 
-    // -----------------------------------------------------
-    // FIND USER
-    // -----------------------------------------------------
-
     const user = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
-      include: {
-        role: true,
-        school: true,
-        branch: true,
-      },
+      where: { email },
+      include: { role: true, school: true, branch: true },
     });
 
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
-
-    // -----------------------------------------------------
-    // CHECK PASSWORD
-    // -----------------------------------------------------
 
     const passwordValid = await bcrypt.compare(dto.password, user.passwordHash);
 
@@ -227,57 +192,152 @@ export class AuthService {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    // -----------------------------------------------------
-    // CHECK USER STATUS
-    // -----------------------------------------------------
-
     if (user.status !== UserStatus.ACTIVE) {
       throw new UnauthorizedException('Your account is not active');
     }
-
-    // -----------------------------------------------------
-    // CHECK SCHOOL STATUS
-    // -----------------------------------------------------
 
     if (user.school.status !== SchoolStatus.ACTIVE) {
       throw new UnauthorizedException('Your school account is not active');
     }
 
-    // -----------------------------------------------------
-    // JWT
-    // -----------------------------------------------------
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: { lastLoginAt: new Date() },
+    });
 
-    const accessToken = await this.generateToken(
-      user.id,
-      user.email,
-      user.schoolId,
-      user.role,
-    );
+    const tokens = await this.issueTokens({
+      id: user.id,
+      email: user.email,
+      schoolId: user.schoolId,
+      roleId: user.role.id,
+      roleName: user.role.name,
+    });
+
+    await this.auditLogs.log({
+      userId: user.id,
+      schoolId: user.schoolId,
+      action: AuditAction.AUTH_LOGIN,
+      entity: 'User',
+      entityId: user.id,
+      ipAddress: meta.ipAddress,
+      userAgent: meta.userAgent,
+    });
 
     return {
       message: 'Login successful',
-      accessToken,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-        role: user.role.name,
-        schoolId: user.schoolId,
-        school: {
-          id: user.school.id,
-          name: user.school.name,
-          code: user.school.code,
-          status: user.school.status,
+      data: {
+        ...tokens,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          role: user.role.name,
+          schoolId: user.schoolId,
+          school: {
+            id: user.school.id,
+            name: user.school.name,
+            code: user.school.code,
+            status: user.school.status,
+          },
+          branch: user.branch
+            ? { id: user.branch.id, name: user.branch.name }
+            : null,
         },
-        branch: user.branch
-          ? {
-              id: user.branch.id,
-              name: user.branch.name,
-            }
-          : null,
       },
     };
+  }
+
+  // =====================================================
+  // REFRESH TOKEN
+  // =====================================================
+
+  async refresh(dto: RefreshTokenDto, userId: string, meta: RequestMeta = {}) {
+    const tokenHash = this.hashToken(dto.refreshToken);
+
+    const stored = await this.prisma.refreshToken.findUnique({
+      where: { tokenHash },
+      include: {
+        user: { include: { role: true, school: true } },
+      },
+    });
+
+    if (!stored || stored.userId !== userId) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+
+    if (stored.revokedAt) {
+      throw new UnauthorizedException('Refresh token has been revoked');
+    }
+
+    if (stored.expiresAt.getTime() < Date.now()) {
+      throw new UnauthorizedException('Refresh token has expired');
+    }
+
+    if (stored.user.status !== UserStatus.ACTIVE) {
+      throw new UnauthorizedException('Your account is not active');
+    }
+
+    await this.prisma.refreshToken.update({
+      where: { id: stored.id },
+      data: { revokedAt: new Date() },
+    });
+
+    const tokens = await this.issueTokens({
+      id: stored.user.id,
+      email: stored.user.email,
+      schoolId: stored.user.schoolId,
+      roleId: stored.user.role.id,
+      roleName: stored.user.role.name,
+    });
+
+    await this.auditLogs.log({
+      userId: stored.user.id,
+      schoolId: stored.user.schoolId,
+      action: AuditAction.AUTH_REFRESH,
+      entity: 'RefreshToken',
+      entityId: stored.id,
+      ipAddress: meta.ipAddress,
+      userAgent: meta.userAgent,
+    });
+
+    return {
+      message: 'Token refreshed successfully',
+      data: tokens,
+    };
+  }
+
+  // =====================================================
+  // LOGOUT
+  // =====================================================
+
+  async logout(userId: string, dto: LogoutDto, meta: RequestMeta = {}) {
+    if (dto.refreshToken) {
+      await this.prisma.refreshToken.updateMany({
+        where: {
+          tokenHash: this.hashToken(dto.refreshToken),
+          userId,
+          revokedAt: null,
+        },
+        data: { revokedAt: new Date() },
+      });
+    } else {
+      await this.prisma.refreshToken.updateMany({
+        where: { userId, revokedAt: null },
+        data: { revokedAt: new Date() },
+      });
+    }
+
+    await this.auditLogs.log({
+      userId,
+      action: AuditAction.AUTH_LOGOUT,
+      entity: 'User',
+      entityId: userId,
+      ipAddress: meta.ipAddress,
+      userAgent: meta.userAgent,
+    });
+
+    return { message: 'Logged out successfully', data: null };
   }
 
   // =====================================================
@@ -286,60 +346,153 @@ export class AuthService {
 
   async getMe(userId: string) {
     const user = await this.prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      include: {
-        role: true,
-        school: true,
-        branch: true,
-      },
+      where: { id: userId },
+      include: { role: true, school: true, branch: true },
     });
 
     if (!user) {
-      throw new UnauthorizedException('User not found');
+      throw new NotFoundException('User not found');
     }
 
     return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      role: user.role.name,
-      status: user.status,
-      school: {
-        id: user.school.id,
-        name: user.school.name,
-        code: user.school.code,
-        status: user.school.status,
+      message: 'Profile fetched successfully',
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        avatar: user.avatar,
+        gender: user.gender,
+        aboutMe: user.aboutMe,
+        city: user.city,
+        country: user.country,
+        emailNotificationsEnabled: user.emailNotificationsEnabled,
+        pushNotificationsEnabled: user.pushNotificationsEnabled,
+        role: user.role.name,
+        roleId: user.roleId,
+        status: user.status,
+        schoolId: user.schoolId,
+        school: {
+          id: user.school.id,
+          name: user.school.name,
+          code: user.school.code,
+          status: user.school.status,
+        },
+        branch: user.branch
+          ? { id: user.branch.id, name: user.branch.name }
+          : null,
       },
-      branch: user.branch
-        ? {
-            id: user.branch.id,
-            name: user.branch.name,
-          }
-        : null,
     };
   }
 
   // =====================================================
-  // JWT GENERATOR
+  // CHANGE PASSWORD
   // =====================================================
 
-  private async generateToken(
-    userId: string,
-    email: string,
-    schoolId: string,
-    role: Role,
-  ) {
-    const payload = {
-      sub: userId,
-      email,
-      schoolId,
-      roleId: role.id,
-      role: role.name,
-    };
+  async changePassword(userId: string, dto: ChangePasswordDto) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, passwordHash: true, schoolId: true },
+    });
 
-    return this.jwtService.signAsync(payload);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const passwordValid = await bcrypt.compare(
+      dto.currentPassword,
+      user.passwordHash,
+    );
+
+    if (!passwordValid) {
+      throw new BadRequestException('Current password is incorrect');
+    }
+
+    if (dto.newPassword !== dto.confirmNewPassword) {
+      throw new BadRequestException('New passwords do not match');
+    }
+
+    if (dto.newPassword === dto.currentPassword) {
+      throw new BadRequestException(
+        'New password must be different from current password',
+      );
+    }
+
+    const passwordHash = await bcrypt.hash(dto.newPassword, 12);
+
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { id: user.id },
+        data: { passwordHash },
+      }),
+      this.prisma.refreshToken.updateMany({
+        where: { userId: user.id, revokedAt: null },
+        data: { revokedAt: new Date() },
+      }),
+    ]);
+
+    await this.auditLogs.log({
+      userId: user.id,
+      schoolId: user.schoolId,
+      action: AuditAction.AUTH_PASSWORD_CHANGE,
+      entity: 'User',
+      entityId: user.id,
+    });
+
+    return { message: 'Password changed successfully', data: null };
+  }
+
+  // =====================================================
+  // TOKEN HELPERS
+  // =====================================================
+
+  private async issueTokens(
+    user: TokenUser,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
+    const accessToken = await this.jwtService.signAsync(
+      {
+        sub: user.id,
+        email: user.email,
+        schoolId: user.schoolId,
+        roleId: user.roleId,
+        role: user.roleName,
+      },
+      {
+        secret: this.configService.get<string>('JWT_SECRET'),
+        expiresIn: (this.configService.get<string>('JWT_EXPIRES_IN') ||
+          '1d') as SignOptions['expiresIn'],
+      },
+    );
+
+    const refreshToken = await this.jwtService.signAsync(
+      { sub: user.id, type: 'refresh', jti: randomUUID() },
+      {
+        secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
+        expiresIn: (this.configService.get<string>('JWT_REFRESH_EXPIRES_IN') ||
+          '30d') as SignOptions['expiresIn'],
+      },
+    );
+
+    const decoded = this.jwtService.decode(refreshToken) as {
+      exp?: number;
+    } | null;
+
+    const expiresAt = decoded?.exp
+      ? new Date(decoded.exp * 1000)
+      : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+
+    await this.prisma.refreshToken.create({
+      data: {
+        userId: user.id,
+        tokenHash: this.hashToken(refreshToken),
+        expiresAt,
+      },
+    });
+
+    return { accessToken, refreshToken };
+  }
+
+  private hashToken(token: string): string {
+    return createHash('sha256').update(token).digest('hex');
   }
 }

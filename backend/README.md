@@ -33,6 +33,7 @@ npm test           # vitest
 | `DATABASE_URL`    | `postgresql://user:pass@localhost:5432/gyannportal_db` | PostgreSQL DSN |
 | `JWT_SECRET`      | long random string                              | JWT signing secret     |
 | `JWT_EXPIRES_IN`  | `7d`                                            | Token lifetime         |
+| `CORS_ORIGINS`    | `http://localhost:3000,http://localhost:3001`   | Comma-separated allowed origins (defaults to dev origins) |
 
 ## API Reference
 

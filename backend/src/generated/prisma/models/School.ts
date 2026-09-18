@@ -49,6 +49,7 @@ export type SchoolMinAggregateOutputType = {
   logo: string | null
   status: $Enums.SchoolStatus | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type SchoolMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type SchoolMaxAggregateOutputType = {
   logo: string | null
   status: $Enums.SchoolStatus | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type SchoolCountAggregateOutputType = {
@@ -83,6 +85,7 @@ export type SchoolCountAggregateOutputType = {
   logo: number
   status: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -110,6 +113,7 @@ export type SchoolMinAggregateInputType = {
   logo?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type SchoolMaxAggregateInputType = {
@@ -127,6 +131,7 @@ export type SchoolMaxAggregateInputType = {
   logo?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type SchoolCountAggregateInputType = {
@@ -144,6 +149,7 @@ export type SchoolCountAggregateInputType = {
   logo?: true
   status?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -248,6 +254,7 @@ export type SchoolGroupByOutputType = {
   logo: string | null
   status: $Enums.SchoolStatus
   createdAt: Date
+  updatedAt: Date
   _count: SchoolCountAggregateOutputType | null
   _avg: SchoolAvgAggregateOutputType | null
   _sum: SchoolSumAggregateOutputType | null
@@ -288,9 +295,30 @@ export type SchoolWhereInput = {
   logo?: Prisma.StringNullableFilter<"School"> | string | null
   status?: Prisma.EnumSchoolStatusFilter<"School"> | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFilter<"School"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"School"> | Date | string
   academicYears?: Prisma.AcademicYearListRelationFilter
   branches?: Prisma.BranchListRelationFilter
   users?: Prisma.UserListRelationFilter
+  students?: Prisma.StudentListRelationFilter
+  teachers?: Prisma.TeacherListRelationFilter
+  parents?: Prisma.ParentListRelationFilter
+  classes?: Prisma.ClassListRelationFilter
+  sections?: Prisma.SectionListRelationFilter
+  subjects?: Prisma.SubjectListRelationFilter
+  courses?: Prisma.CourseListRelationFilter
+  enrollments?: Prisma.EnrollmentListRelationFilter
+  attendance?: Prisma.AttendanceListRelationFilter
+  assignments?: Prisma.AssignmentListRelationFilter
+  exams?: Prisma.ExamListRelationFilter
+  results?: Prisma.ResultListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  files?: Prisma.MediaFileListRelationFilter
+  auditLogs?: Prisma.AuditLogListRelationFilter
+  teacherClasses?: Prisma.TeacherClassListRelationFilter
+  communities?: Prisma.CommunityListRelationFilter
+  posts?: Prisma.PostListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  votes?: Prisma.VoteListRelationFilter
 }
 
 export type SchoolOrderByWithRelationInput = {
@@ -308,9 +336,30 @@ export type SchoolOrderByWithRelationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   academicYears?: Prisma.AcademicYearOrderByRelationAggregateInput
   branches?: Prisma.BranchOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
+  students?: Prisma.StudentOrderByRelationAggregateInput
+  teachers?: Prisma.TeacherOrderByRelationAggregateInput
+  parents?: Prisma.ParentOrderByRelationAggregateInput
+  classes?: Prisma.ClassOrderByRelationAggregateInput
+  sections?: Prisma.SectionOrderByRelationAggregateInput
+  subjects?: Prisma.SubjectOrderByRelationAggregateInput
+  courses?: Prisma.CourseOrderByRelationAggregateInput
+  enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput
+  attendance?: Prisma.AttendanceOrderByRelationAggregateInput
+  assignments?: Prisma.AssignmentOrderByRelationAggregateInput
+  exams?: Prisma.ExamOrderByRelationAggregateInput
+  results?: Prisma.ResultOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  files?: Prisma.MediaFileOrderByRelationAggregateInput
+  auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
+  teacherClasses?: Prisma.TeacherClassOrderByRelationAggregateInput
+  communities?: Prisma.CommunityOrderByRelationAggregateInput
+  posts?: Prisma.PostOrderByRelationAggregateInput
+  comments?: Prisma.CommentOrderByRelationAggregateInput
+  votes?: Prisma.VoteOrderByRelationAggregateInput
 }
 
 export type SchoolWhereUniqueInput = Prisma.AtLeast<{
@@ -331,9 +380,30 @@ export type SchoolWhereUniqueInput = Prisma.AtLeast<{
   logo?: Prisma.StringNullableFilter<"School"> | string | null
   status?: Prisma.EnumSchoolStatusFilter<"School"> | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFilter<"School"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"School"> | Date | string
   academicYears?: Prisma.AcademicYearListRelationFilter
   branches?: Prisma.BranchListRelationFilter
   users?: Prisma.UserListRelationFilter
+  students?: Prisma.StudentListRelationFilter
+  teachers?: Prisma.TeacherListRelationFilter
+  parents?: Prisma.ParentListRelationFilter
+  classes?: Prisma.ClassListRelationFilter
+  sections?: Prisma.SectionListRelationFilter
+  subjects?: Prisma.SubjectListRelationFilter
+  courses?: Prisma.CourseListRelationFilter
+  enrollments?: Prisma.EnrollmentListRelationFilter
+  attendance?: Prisma.AttendanceListRelationFilter
+  assignments?: Prisma.AssignmentListRelationFilter
+  exams?: Prisma.ExamListRelationFilter
+  results?: Prisma.ResultListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  files?: Prisma.MediaFileListRelationFilter
+  auditLogs?: Prisma.AuditLogListRelationFilter
+  teacherClasses?: Prisma.TeacherClassListRelationFilter
+  communities?: Prisma.CommunityListRelationFilter
+  posts?: Prisma.PostListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  votes?: Prisma.VoteListRelationFilter
 }, "id" | "code" | "registrationNumber">
 
 export type SchoolOrderByWithAggregationInput = {
@@ -351,6 +421,7 @@ export type SchoolOrderByWithAggregationInput = {
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.SchoolCountOrderByAggregateInput
   _avg?: Prisma.SchoolAvgOrderByAggregateInput
   _max?: Prisma.SchoolMaxOrderByAggregateInput
@@ -376,6 +447,7 @@ export type SchoolScalarWhereWithAggregatesInput = {
   logo?: Prisma.StringNullableWithAggregatesFilter<"School"> | string | null
   status?: Prisma.EnumSchoolStatusWithAggregatesFilter<"School"> | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"School"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"School"> | Date | string
 }
 
 export type SchoolCreateInput = {
@@ -393,9 +465,30 @@ export type SchoolCreateInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
   branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
   users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateInput = {
@@ -413,9 +506,30 @@ export type SchoolUncheckedCreateInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUpdateInput = {
@@ -433,9 +547,30 @@ export type SchoolUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
   branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
   users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateInput = {
@@ -453,9 +588,30 @@ export type SchoolUncheckedUpdateInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
   branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateManyInput = {
@@ -473,6 +629,7 @@ export type SchoolCreateManyInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type SchoolUpdateManyMutationInput = {
@@ -490,6 +647,7 @@ export type SchoolUpdateManyMutationInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SchoolUncheckedUpdateManyInput = {
@@ -507,6 +665,7 @@ export type SchoolUncheckedUpdateManyInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SchoolCountOrderByAggregateInput = {
@@ -524,6 +683,7 @@ export type SchoolCountOrderByAggregateInput = {
   logo?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SchoolAvgOrderByAggregateInput = {
@@ -545,6 +705,7 @@ export type SchoolMaxOrderByAggregateInput = {
   logo?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SchoolMinOrderByAggregateInput = {
@@ -562,6 +723,7 @@ export type SchoolMinOrderByAggregateInput = {
   logo?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SchoolSumOrderByAggregateInput = {
@@ -571,6 +733,11 @@ export type SchoolSumOrderByAggregateInput = {
 export type SchoolScalarRelationFilter = {
   is?: Prisma.SchoolWhereInput
   isNot?: Prisma.SchoolWhereInput
+}
+
+export type SchoolNullableScalarRelationFilter = {
+  is?: Prisma.SchoolWhereInput | null
+  isNot?: Prisma.SchoolWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -647,6 +814,290 @@ export type SchoolUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutUsersInput, Prisma.SchoolUpdateWithoutUsersInput>, Prisma.SchoolUncheckedUpdateWithoutUsersInput>
 }
 
+export type SchoolCreateNestedOneWithoutStudentsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutStudentsInput, Prisma.SchoolUncheckedCreateWithoutStudentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutStudentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutStudentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutStudentsInput, Prisma.SchoolUncheckedCreateWithoutStudentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutStudentsInput
+  upsert?: Prisma.SchoolUpsertWithoutStudentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutStudentsInput, Prisma.SchoolUpdateWithoutStudentsInput>, Prisma.SchoolUncheckedUpdateWithoutStudentsInput>
+}
+
+export type SchoolCreateNestedOneWithoutTeachersInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutTeachersInput, Prisma.SchoolUncheckedCreateWithoutTeachersInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutTeachersInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutTeachersNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutTeachersInput, Prisma.SchoolUncheckedCreateWithoutTeachersInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutTeachersInput
+  upsert?: Prisma.SchoolUpsertWithoutTeachersInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutTeachersInput, Prisma.SchoolUpdateWithoutTeachersInput>, Prisma.SchoolUncheckedUpdateWithoutTeachersInput>
+}
+
+export type SchoolCreateNestedOneWithoutParentsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutParentsInput, Prisma.SchoolUncheckedCreateWithoutParentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutParentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutParentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutParentsInput, Prisma.SchoolUncheckedCreateWithoutParentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutParentsInput
+  upsert?: Prisma.SchoolUpsertWithoutParentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutParentsInput, Prisma.SchoolUpdateWithoutParentsInput>, Prisma.SchoolUncheckedUpdateWithoutParentsInput>
+}
+
+export type SchoolCreateNestedOneWithoutClassesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutClassesInput, Prisma.SchoolUncheckedCreateWithoutClassesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutClassesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutClassesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutClassesInput, Prisma.SchoolUncheckedCreateWithoutClassesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutClassesInput
+  upsert?: Prisma.SchoolUpsertWithoutClassesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutClassesInput, Prisma.SchoolUpdateWithoutClassesInput>, Prisma.SchoolUncheckedUpdateWithoutClassesInput>
+}
+
+export type SchoolCreateNestedOneWithoutSectionsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutSectionsInput, Prisma.SchoolUncheckedCreateWithoutSectionsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutSectionsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutSectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutSectionsInput, Prisma.SchoolUncheckedCreateWithoutSectionsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutSectionsInput
+  upsert?: Prisma.SchoolUpsertWithoutSectionsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutSectionsInput, Prisma.SchoolUpdateWithoutSectionsInput>, Prisma.SchoolUncheckedUpdateWithoutSectionsInput>
+}
+
+export type SchoolCreateNestedOneWithoutSubjectsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutSubjectsInput, Prisma.SchoolUncheckedCreateWithoutSubjectsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutSubjectsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutSubjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutSubjectsInput, Prisma.SchoolUncheckedCreateWithoutSubjectsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutSubjectsInput
+  upsert?: Prisma.SchoolUpsertWithoutSubjectsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutSubjectsInput, Prisma.SchoolUpdateWithoutSubjectsInput>, Prisma.SchoolUncheckedUpdateWithoutSubjectsInput>
+}
+
+export type SchoolCreateNestedOneWithoutCoursesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutCoursesInput, Prisma.SchoolUncheckedCreateWithoutCoursesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutCoursesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutCoursesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutCoursesInput, Prisma.SchoolUncheckedCreateWithoutCoursesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutCoursesInput
+  upsert?: Prisma.SchoolUpsertWithoutCoursesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutCoursesInput, Prisma.SchoolUpdateWithoutCoursesInput>, Prisma.SchoolUncheckedUpdateWithoutCoursesInput>
+}
+
+export type SchoolCreateNestedOneWithoutTeacherClassesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutTeacherClassesInput, Prisma.SchoolUncheckedCreateWithoutTeacherClassesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutTeacherClassesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutTeacherClassesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutTeacherClassesInput, Prisma.SchoolUncheckedCreateWithoutTeacherClassesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutTeacherClassesInput
+  upsert?: Prisma.SchoolUpsertWithoutTeacherClassesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutTeacherClassesInput, Prisma.SchoolUpdateWithoutTeacherClassesInput>, Prisma.SchoolUncheckedUpdateWithoutTeacherClassesInput>
+}
+
+export type SchoolCreateNestedOneWithoutEnrollmentsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutEnrollmentsInput, Prisma.SchoolUncheckedCreateWithoutEnrollmentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutEnrollmentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutEnrollmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutEnrollmentsInput, Prisma.SchoolUncheckedCreateWithoutEnrollmentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutEnrollmentsInput
+  upsert?: Prisma.SchoolUpsertWithoutEnrollmentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutEnrollmentsInput, Prisma.SchoolUpdateWithoutEnrollmentsInput>, Prisma.SchoolUncheckedUpdateWithoutEnrollmentsInput>
+}
+
+export type SchoolCreateNestedOneWithoutAttendanceInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutAttendanceInput, Prisma.SchoolUncheckedCreateWithoutAttendanceInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutAttendanceInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutAttendanceNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutAttendanceInput, Prisma.SchoolUncheckedCreateWithoutAttendanceInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutAttendanceInput
+  upsert?: Prisma.SchoolUpsertWithoutAttendanceInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutAttendanceInput, Prisma.SchoolUpdateWithoutAttendanceInput>, Prisma.SchoolUncheckedUpdateWithoutAttendanceInput>
+}
+
+export type SchoolCreateNestedOneWithoutAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutAssignmentsInput, Prisma.SchoolUncheckedCreateWithoutAssignmentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutAssignmentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutAssignmentsInput, Prisma.SchoolUncheckedCreateWithoutAssignmentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutAssignmentsInput
+  upsert?: Prisma.SchoolUpsertWithoutAssignmentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.SchoolUpdateWithoutAssignmentsInput>, Prisma.SchoolUncheckedUpdateWithoutAssignmentsInput>
+}
+
+export type SchoolCreateNestedOneWithoutExamsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutExamsInput, Prisma.SchoolUncheckedCreateWithoutExamsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutExamsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutExamsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutExamsInput, Prisma.SchoolUncheckedCreateWithoutExamsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutExamsInput
+  upsert?: Prisma.SchoolUpsertWithoutExamsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutExamsInput, Prisma.SchoolUpdateWithoutExamsInput>, Prisma.SchoolUncheckedUpdateWithoutExamsInput>
+}
+
+export type SchoolCreateNestedOneWithoutResultsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutResultsInput, Prisma.SchoolUncheckedCreateWithoutResultsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutResultsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutResultsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutResultsInput, Prisma.SchoolUncheckedCreateWithoutResultsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutResultsInput
+  upsert?: Prisma.SchoolUpsertWithoutResultsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutResultsInput, Prisma.SchoolUpdateWithoutResultsInput>, Prisma.SchoolUncheckedUpdateWithoutResultsInput>
+}
+
+export type SchoolCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutNotificationsInput, Prisma.SchoolUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutNotificationsInput, Prisma.SchoolUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.SchoolUpsertWithoutNotificationsInput
+  disconnect?: Prisma.SchoolWhereInput | boolean
+  delete?: Prisma.SchoolWhereInput | boolean
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutNotificationsInput, Prisma.SchoolUpdateWithoutNotificationsInput>, Prisma.SchoolUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type SchoolCreateNestedOneWithoutFilesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutFilesInput, Prisma.SchoolUncheckedCreateWithoutFilesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutFilesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutFilesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutFilesInput, Prisma.SchoolUncheckedCreateWithoutFilesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutFilesInput
+  upsert?: Prisma.SchoolUpsertWithoutFilesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutFilesInput, Prisma.SchoolUpdateWithoutFilesInput>, Prisma.SchoolUncheckedUpdateWithoutFilesInput>
+}
+
+export type SchoolCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutAuditLogsInput, Prisma.SchoolUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutAuditLogsInput, Prisma.SchoolUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.SchoolUpsertWithoutAuditLogsInput
+  disconnect?: Prisma.SchoolWhereInput | boolean
+  delete?: Prisma.SchoolWhereInput | boolean
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.SchoolUpdateWithoutAuditLogsInput>, Prisma.SchoolUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type SchoolCreateNestedOneWithoutCommunitiesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutCommunitiesInput, Prisma.SchoolUncheckedCreateWithoutCommunitiesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutCommunitiesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutCommunitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutCommunitiesInput, Prisma.SchoolUncheckedCreateWithoutCommunitiesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutCommunitiesInput
+  upsert?: Prisma.SchoolUpsertWithoutCommunitiesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutCommunitiesInput, Prisma.SchoolUpdateWithoutCommunitiesInput>, Prisma.SchoolUncheckedUpdateWithoutCommunitiesInput>
+}
+
+export type SchoolCreateNestedOneWithoutPostsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutPostsInput, Prisma.SchoolUncheckedCreateWithoutPostsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutPostsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutPostsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutPostsInput, Prisma.SchoolUncheckedCreateWithoutPostsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutPostsInput
+  upsert?: Prisma.SchoolUpsertWithoutPostsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutPostsInput, Prisma.SchoolUpdateWithoutPostsInput>, Prisma.SchoolUncheckedUpdateWithoutPostsInput>
+}
+
+export type SchoolCreateNestedOneWithoutCommentsInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutCommentsInput, Prisma.SchoolUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutCommentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutCommentsInput, Prisma.SchoolUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutCommentsInput
+  upsert?: Prisma.SchoolUpsertWithoutCommentsInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutCommentsInput, Prisma.SchoolUpdateWithoutCommentsInput>, Prisma.SchoolUncheckedUpdateWithoutCommentsInput>
+}
+
+export type SchoolCreateNestedOneWithoutVotesInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutVotesInput, Prisma.SchoolUncheckedCreateWithoutVotesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutVotesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+}
+
+export type SchoolUpdateOneRequiredWithoutVotesNestedInput = {
+  create?: Prisma.XOR<Prisma.SchoolCreateWithoutVotesInput, Prisma.SchoolUncheckedCreateWithoutVotesInput>
+  connectOrCreate?: Prisma.SchoolCreateOrConnectWithoutVotesInput
+  upsert?: Prisma.SchoolUpsertWithoutVotesInput
+  connect?: Prisma.SchoolWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SchoolUpdateToOneWithWhereWithoutVotesInput, Prisma.SchoolUpdateWithoutVotesInput>, Prisma.SchoolUncheckedUpdateWithoutVotesInput>
+}
+
 export type SchoolCreateWithoutAcademicYearsInput = {
   id?: string
   name: string
@@ -662,8 +1113,29 @@ export type SchoolCreateWithoutAcademicYearsInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
   users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutAcademicYearsInput = {
@@ -681,8 +1153,29 @@ export type SchoolUncheckedCreateWithoutAcademicYearsInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutAcademicYearsInput = {
@@ -716,8 +1209,29 @@ export type SchoolUpdateWithoutAcademicYearsInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
   users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutAcademicYearsInput = {
@@ -735,8 +1249,29 @@ export type SchoolUncheckedUpdateWithoutAcademicYearsInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutBranchesInput = {
@@ -754,8 +1289,29 @@ export type SchoolCreateWithoutBranchesInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
   users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutBranchesInput = {
@@ -773,8 +1329,29 @@ export type SchoolUncheckedCreateWithoutBranchesInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutBranchesInput = {
@@ -808,8 +1385,29 @@ export type SchoolUpdateWithoutBranchesInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
   users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutBranchesInput = {
@@ -827,8 +1425,29 @@ export type SchoolUncheckedUpdateWithoutBranchesInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolCreateWithoutUsersInput = {
@@ -846,8 +1465,29 @@ export type SchoolCreateWithoutUsersInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
   branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolUncheckedCreateWithoutUsersInput = {
@@ -865,8 +1505,29 @@ export type SchoolUncheckedCreateWithoutUsersInput = {
   logo?: string | null
   status?: $Enums.SchoolStatus
   createdAt?: Date | string
+  updatedAt?: Date | string
   academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
   branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
 }
 
 export type SchoolCreateOrConnectWithoutUsersInput = {
@@ -900,8 +1561,29 @@ export type SchoolUpdateWithoutUsersInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
   branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
 }
 
 export type SchoolUncheckedUpdateWithoutUsersInput = {
@@ -919,8 +1601,3549 @@ export type SchoolUncheckedUpdateWithoutUsersInput = {
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
   branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutStudentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutStudentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutStudentsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutStudentsInput, Prisma.SchoolUncheckedCreateWithoutStudentsInput>
+}
+
+export type SchoolUpsertWithoutStudentsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutStudentsInput, Prisma.SchoolUncheckedUpdateWithoutStudentsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutStudentsInput, Prisma.SchoolUncheckedCreateWithoutStudentsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutStudentsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutStudentsInput, Prisma.SchoolUncheckedUpdateWithoutStudentsInput>
+}
+
+export type SchoolUpdateWithoutStudentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutStudentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutTeachersInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutTeachersInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutTeachersInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutTeachersInput, Prisma.SchoolUncheckedCreateWithoutTeachersInput>
+}
+
+export type SchoolUpsertWithoutTeachersInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutTeachersInput, Prisma.SchoolUncheckedUpdateWithoutTeachersInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutTeachersInput, Prisma.SchoolUncheckedCreateWithoutTeachersInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutTeachersInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutTeachersInput, Prisma.SchoolUncheckedUpdateWithoutTeachersInput>
+}
+
+export type SchoolUpdateWithoutTeachersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutTeachersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutParentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutParentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutParentsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutParentsInput, Prisma.SchoolUncheckedCreateWithoutParentsInput>
+}
+
+export type SchoolUpsertWithoutParentsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutParentsInput, Prisma.SchoolUncheckedUpdateWithoutParentsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutParentsInput, Prisma.SchoolUncheckedCreateWithoutParentsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutParentsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutParentsInput, Prisma.SchoolUncheckedUpdateWithoutParentsInput>
+}
+
+export type SchoolUpdateWithoutParentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutParentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutClassesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutClassesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutClassesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutClassesInput, Prisma.SchoolUncheckedCreateWithoutClassesInput>
+}
+
+export type SchoolUpsertWithoutClassesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutClassesInput, Prisma.SchoolUncheckedUpdateWithoutClassesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutClassesInput, Prisma.SchoolUncheckedCreateWithoutClassesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutClassesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutClassesInput, Prisma.SchoolUncheckedUpdateWithoutClassesInput>
+}
+
+export type SchoolUpdateWithoutClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutSectionsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutSectionsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutSectionsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutSectionsInput, Prisma.SchoolUncheckedCreateWithoutSectionsInput>
+}
+
+export type SchoolUpsertWithoutSectionsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutSectionsInput, Prisma.SchoolUncheckedUpdateWithoutSectionsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutSectionsInput, Prisma.SchoolUncheckedCreateWithoutSectionsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutSectionsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutSectionsInput, Prisma.SchoolUncheckedUpdateWithoutSectionsInput>
+}
+
+export type SchoolUpdateWithoutSectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutSectionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutSubjectsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutSubjectsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutSubjectsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutSubjectsInput, Prisma.SchoolUncheckedCreateWithoutSubjectsInput>
+}
+
+export type SchoolUpsertWithoutSubjectsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutSubjectsInput, Prisma.SchoolUncheckedUpdateWithoutSubjectsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutSubjectsInput, Prisma.SchoolUncheckedCreateWithoutSubjectsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutSubjectsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutSubjectsInput, Prisma.SchoolUncheckedUpdateWithoutSubjectsInput>
+}
+
+export type SchoolUpdateWithoutSubjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutSubjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutCoursesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutCoursesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutCoursesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutCoursesInput, Prisma.SchoolUncheckedCreateWithoutCoursesInput>
+}
+
+export type SchoolUpsertWithoutCoursesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutCoursesInput, Prisma.SchoolUncheckedUpdateWithoutCoursesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutCoursesInput, Prisma.SchoolUncheckedCreateWithoutCoursesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutCoursesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutCoursesInput, Prisma.SchoolUncheckedUpdateWithoutCoursesInput>
+}
+
+export type SchoolUpdateWithoutCoursesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutCoursesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutTeacherClassesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutTeacherClassesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutTeacherClassesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutTeacherClassesInput, Prisma.SchoolUncheckedCreateWithoutTeacherClassesInput>
+}
+
+export type SchoolUpsertWithoutTeacherClassesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutTeacherClassesInput, Prisma.SchoolUncheckedUpdateWithoutTeacherClassesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutTeacherClassesInput, Prisma.SchoolUncheckedCreateWithoutTeacherClassesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutTeacherClassesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutTeacherClassesInput, Prisma.SchoolUncheckedUpdateWithoutTeacherClassesInput>
+}
+
+export type SchoolUpdateWithoutTeacherClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutTeacherClassesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutEnrollmentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutEnrollmentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutEnrollmentsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutEnrollmentsInput, Prisma.SchoolUncheckedCreateWithoutEnrollmentsInput>
+}
+
+export type SchoolUpsertWithoutEnrollmentsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutEnrollmentsInput, Prisma.SchoolUncheckedUpdateWithoutEnrollmentsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutEnrollmentsInput, Prisma.SchoolUncheckedCreateWithoutEnrollmentsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutEnrollmentsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutEnrollmentsInput, Prisma.SchoolUncheckedUpdateWithoutEnrollmentsInput>
+}
+
+export type SchoolUpdateWithoutEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutAttendanceInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutAttendanceInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutAttendanceInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutAttendanceInput, Prisma.SchoolUncheckedCreateWithoutAttendanceInput>
+}
+
+export type SchoolUpsertWithoutAttendanceInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutAttendanceInput, Prisma.SchoolUncheckedUpdateWithoutAttendanceInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutAttendanceInput, Prisma.SchoolUncheckedCreateWithoutAttendanceInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutAttendanceInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutAttendanceInput, Prisma.SchoolUncheckedUpdateWithoutAttendanceInput>
+}
+
+export type SchoolUpdateWithoutAttendanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutAttendanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutAssignmentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutAssignmentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutAssignmentsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutAssignmentsInput, Prisma.SchoolUncheckedCreateWithoutAssignmentsInput>
+}
+
+export type SchoolUpsertWithoutAssignmentsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutAssignmentsInput, Prisma.SchoolUncheckedUpdateWithoutAssignmentsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutAssignmentsInput, Prisma.SchoolUncheckedCreateWithoutAssignmentsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutAssignmentsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutAssignmentsInput, Prisma.SchoolUncheckedUpdateWithoutAssignmentsInput>
+}
+
+export type SchoolUpdateWithoutAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutExamsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutExamsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutExamsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutExamsInput, Prisma.SchoolUncheckedCreateWithoutExamsInput>
+}
+
+export type SchoolUpsertWithoutExamsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutExamsInput, Prisma.SchoolUncheckedUpdateWithoutExamsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutExamsInput, Prisma.SchoolUncheckedCreateWithoutExamsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutExamsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutExamsInput, Prisma.SchoolUncheckedUpdateWithoutExamsInput>
+}
+
+export type SchoolUpdateWithoutExamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutExamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutResultsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutResultsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutResultsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutResultsInput, Prisma.SchoolUncheckedCreateWithoutResultsInput>
+}
+
+export type SchoolUpsertWithoutResultsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutResultsInput, Prisma.SchoolUncheckedUpdateWithoutResultsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutResultsInput, Prisma.SchoolUncheckedCreateWithoutResultsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutResultsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutResultsInput, Prisma.SchoolUncheckedUpdateWithoutResultsInput>
+}
+
+export type SchoolUpdateWithoutResultsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutResultsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutNotificationsInput, Prisma.SchoolUncheckedCreateWithoutNotificationsInput>
+}
+
+export type SchoolUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutNotificationsInput, Prisma.SchoolUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutNotificationsInput, Prisma.SchoolUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutNotificationsInput, Prisma.SchoolUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type SchoolUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutFilesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutFilesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutFilesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutFilesInput, Prisma.SchoolUncheckedCreateWithoutFilesInput>
+}
+
+export type SchoolUpsertWithoutFilesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutFilesInput, Prisma.SchoolUncheckedUpdateWithoutFilesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutFilesInput, Prisma.SchoolUncheckedCreateWithoutFilesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutFilesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutFilesInput, Prisma.SchoolUncheckedUpdateWithoutFilesInput>
+}
+
+export type SchoolUpdateWithoutFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutAuditLogsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutAuditLogsInput, Prisma.SchoolUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type SchoolUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutAuditLogsInput, Prisma.SchoolUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutAuditLogsInput, Prisma.SchoolUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutAuditLogsInput, Prisma.SchoolUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type SchoolUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutCommunitiesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutCommunitiesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutCommunitiesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutCommunitiesInput, Prisma.SchoolUncheckedCreateWithoutCommunitiesInput>
+}
+
+export type SchoolUpsertWithoutCommunitiesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutCommunitiesInput, Prisma.SchoolUncheckedUpdateWithoutCommunitiesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutCommunitiesInput, Prisma.SchoolUncheckedCreateWithoutCommunitiesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutCommunitiesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutCommunitiesInput, Prisma.SchoolUncheckedUpdateWithoutCommunitiesInput>
+}
+
+export type SchoolUpdateWithoutCommunitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutCommunitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutPostsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutPostsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutPostsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutPostsInput, Prisma.SchoolUncheckedCreateWithoutPostsInput>
+}
+
+export type SchoolUpsertWithoutPostsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutPostsInput, Prisma.SchoolUncheckedUpdateWithoutPostsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutPostsInput, Prisma.SchoolUncheckedCreateWithoutPostsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutPostsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutPostsInput, Prisma.SchoolUncheckedUpdateWithoutPostsInput>
+}
+
+export type SchoolUpdateWithoutPostsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutPostsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutCommentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutCommentsInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutCommentsInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutCommentsInput, Prisma.SchoolUncheckedCreateWithoutCommentsInput>
+}
+
+export type SchoolUpsertWithoutCommentsInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutCommentsInput, Prisma.SchoolUncheckedUpdateWithoutCommentsInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutCommentsInput, Prisma.SchoolUncheckedCreateWithoutCommentsInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutCommentsInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutCommentsInput, Prisma.SchoolUncheckedUpdateWithoutCommentsInput>
+}
+
+export type SchoolUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolCreateWithoutVotesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolUncheckedCreateWithoutVotesInput = {
+  id?: string
+  name: string
+  code: string
+  registrationNumber?: string | null
+  schoolType?: $Enums.SchoolType | null
+  level?: $Enums.SchoolLevel | null
+  establishedYear?: number | null
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  address?: string | null
+  logo?: string | null
+  status?: $Enums.SchoolStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  academicYears?: Prisma.AcademicYearUncheckedCreateNestedManyWithoutSchoolInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutSchoolInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
+  students?: Prisma.StudentUncheckedCreateNestedManyWithoutSchoolInput
+  teachers?: Prisma.TeacherUncheckedCreateNestedManyWithoutSchoolInput
+  parents?: Prisma.ParentUncheckedCreateNestedManyWithoutSchoolInput
+  classes?: Prisma.ClassUncheckedCreateNestedManyWithoutSchoolInput
+  sections?: Prisma.SectionUncheckedCreateNestedManyWithoutSchoolInput
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutSchoolInput
+  courses?: Prisma.CourseUncheckedCreateNestedManyWithoutSchoolInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutSchoolInput
+  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSchoolInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutSchoolInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutSchoolInput
+  results?: Prisma.ResultUncheckedCreateNestedManyWithoutSchoolInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutSchoolInput
+  files?: Prisma.MediaFileUncheckedCreateNestedManyWithoutSchoolInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
+  teacherClasses?: Prisma.TeacherClassUncheckedCreateNestedManyWithoutSchoolInput
+  communities?: Prisma.CommunityUncheckedCreateNestedManyWithoutSchoolInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutSchoolInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutSchoolInput
+}
+
+export type SchoolCreateOrConnectWithoutVotesInput = {
+  where: Prisma.SchoolWhereUniqueInput
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutVotesInput, Prisma.SchoolUncheckedCreateWithoutVotesInput>
+}
+
+export type SchoolUpsertWithoutVotesInput = {
+  update: Prisma.XOR<Prisma.SchoolUpdateWithoutVotesInput, Prisma.SchoolUncheckedUpdateWithoutVotesInput>
+  create: Prisma.XOR<Prisma.SchoolCreateWithoutVotesInput, Prisma.SchoolUncheckedCreateWithoutVotesInput>
+  where?: Prisma.SchoolWhereInput
+}
+
+export type SchoolUpdateToOneWithWhereWithoutVotesInput = {
+  where?: Prisma.SchoolWhereInput
+  data: Prisma.XOR<Prisma.SchoolUpdateWithoutVotesInput, Prisma.SchoolUncheckedUpdateWithoutVotesInput>
+}
+
+export type SchoolUpdateWithoutVotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutSchoolNestedInput
+}
+
+export type SchoolUncheckedUpdateWithoutVotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolType?: Prisma.NullableEnumSchoolTypeFieldUpdateOperationsInput | $Enums.SchoolType | null
+  level?: Prisma.NullableEnumSchoolLevelFieldUpdateOperationsInput | $Enums.SchoolLevel | null
+  establishedYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumSchoolStatusFieldUpdateOperationsInput | $Enums.SchoolStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYears?: Prisma.AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutSchoolNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
+  students?: Prisma.StudentUncheckedUpdateManyWithoutSchoolNestedInput
+  teachers?: Prisma.TeacherUncheckedUpdateManyWithoutSchoolNestedInput
+  parents?: Prisma.ParentUncheckedUpdateManyWithoutSchoolNestedInput
+  classes?: Prisma.ClassUncheckedUpdateManyWithoutSchoolNestedInput
+  sections?: Prisma.SectionUncheckedUpdateManyWithoutSchoolNestedInput
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutSchoolNestedInput
+  courses?: Prisma.CourseUncheckedUpdateManyWithoutSchoolNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutSchoolNestedInput
+  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutSchoolNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutSchoolNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutSchoolNestedInput
+  results?: Prisma.ResultUncheckedUpdateManyWithoutSchoolNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutSchoolNestedInput
+  files?: Prisma.MediaFileUncheckedUpdateManyWithoutSchoolNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
+  teacherClasses?: Prisma.TeacherClassUncheckedUpdateManyWithoutSchoolNestedInput
+  communities?: Prisma.CommunityUncheckedUpdateManyWithoutSchoolNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutSchoolNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
 
@@ -932,12 +5155,52 @@ export type SchoolCountOutputType = {
   academicYears: number
   branches: number
   users: number
+  students: number
+  teachers: number
+  parents: number
+  classes: number
+  sections: number
+  subjects: number
+  courses: number
+  enrollments: number
+  attendance: number
+  assignments: number
+  exams: number
+  results: number
+  notifications: number
+  files: number
+  auditLogs: number
+  teacherClasses: number
+  communities: number
+  posts: number
+  comments: number
+  votes: number
 }
 
 export type SchoolCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   academicYears?: boolean | SchoolCountOutputTypeCountAcademicYearsArgs
   branches?: boolean | SchoolCountOutputTypeCountBranchesArgs
   users?: boolean | SchoolCountOutputTypeCountUsersArgs
+  students?: boolean | SchoolCountOutputTypeCountStudentsArgs
+  teachers?: boolean | SchoolCountOutputTypeCountTeachersArgs
+  parents?: boolean | SchoolCountOutputTypeCountParentsArgs
+  classes?: boolean | SchoolCountOutputTypeCountClassesArgs
+  sections?: boolean | SchoolCountOutputTypeCountSectionsArgs
+  subjects?: boolean | SchoolCountOutputTypeCountSubjectsArgs
+  courses?: boolean | SchoolCountOutputTypeCountCoursesArgs
+  enrollments?: boolean | SchoolCountOutputTypeCountEnrollmentsArgs
+  attendance?: boolean | SchoolCountOutputTypeCountAttendanceArgs
+  assignments?: boolean | SchoolCountOutputTypeCountAssignmentsArgs
+  exams?: boolean | SchoolCountOutputTypeCountExamsArgs
+  results?: boolean | SchoolCountOutputTypeCountResultsArgs
+  notifications?: boolean | SchoolCountOutputTypeCountNotificationsArgs
+  files?: boolean | SchoolCountOutputTypeCountFilesArgs
+  auditLogs?: boolean | SchoolCountOutputTypeCountAuditLogsArgs
+  teacherClasses?: boolean | SchoolCountOutputTypeCountTeacherClassesArgs
+  communities?: boolean | SchoolCountOutputTypeCountCommunitiesArgs
+  posts?: boolean | SchoolCountOutputTypeCountPostsArgs
+  comments?: boolean | SchoolCountOutputTypeCountCommentsArgs
+  votes?: boolean | SchoolCountOutputTypeCountVotesArgs
 }
 
 /**
@@ -971,6 +5234,146 @@ export type SchoolCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountStudentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StudentWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountTeachersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeacherWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountParentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ParentWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountSectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SectionWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubjectWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountCoursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CourseWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EnrollmentWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountAttendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssignmentWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountExamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExamWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResultWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaFileWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditLogWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountTeacherClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeacherClassWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountCommunitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommunityWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommentWhereInput
+}
+
+/**
+ * SchoolCountOutputType without action
+ */
+export type SchoolCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VoteWhereInput
+}
+
 
 export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -987,9 +5390,30 @@ export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   logo?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   academicYears?: boolean | Prisma.School$academicYearsArgs<ExtArgs>
   branches?: boolean | Prisma.School$branchesArgs<ExtArgs>
   users?: boolean | Prisma.School$usersArgs<ExtArgs>
+  students?: boolean | Prisma.School$studentsArgs<ExtArgs>
+  teachers?: boolean | Prisma.School$teachersArgs<ExtArgs>
+  parents?: boolean | Prisma.School$parentsArgs<ExtArgs>
+  classes?: boolean | Prisma.School$classesArgs<ExtArgs>
+  sections?: boolean | Prisma.School$sectionsArgs<ExtArgs>
+  subjects?: boolean | Prisma.School$subjectsArgs<ExtArgs>
+  courses?: boolean | Prisma.School$coursesArgs<ExtArgs>
+  enrollments?: boolean | Prisma.School$enrollmentsArgs<ExtArgs>
+  attendance?: boolean | Prisma.School$attendanceArgs<ExtArgs>
+  assignments?: boolean | Prisma.School$assignmentsArgs<ExtArgs>
+  exams?: boolean | Prisma.School$examsArgs<ExtArgs>
+  results?: boolean | Prisma.School$resultsArgs<ExtArgs>
+  notifications?: boolean | Prisma.School$notificationsArgs<ExtArgs>
+  files?: boolean | Prisma.School$filesArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.School$auditLogsArgs<ExtArgs>
+  teacherClasses?: boolean | Prisma.School$teacherClassesArgs<ExtArgs>
+  communities?: boolean | Prisma.School$communitiesArgs<ExtArgs>
+  posts?: boolean | Prisma.School$postsArgs<ExtArgs>
+  comments?: boolean | Prisma.School$commentsArgs<ExtArgs>
+  votes?: boolean | Prisma.School$votesArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["school"]>
 
@@ -1008,6 +5432,7 @@ export type SchoolSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   logo?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["school"]>
 
 export type SchoolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1025,6 +5450,7 @@ export type SchoolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   logo?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["school"]>
 
 export type SchoolSelectScalar = {
@@ -1042,13 +5468,34 @@ export type SchoolSelectScalar = {
   logo?: boolean
   status?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type SchoolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "registrationNumber" | "schoolType" | "level" | "establishedYear" | "email" | "phone" | "website" | "address" | "logo" | "status" | "createdAt", ExtArgs["result"]["school"]>
+export type SchoolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "registrationNumber" | "schoolType" | "level" | "establishedYear" | "email" | "phone" | "website" | "address" | "logo" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
 export type SchoolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   academicYears?: boolean | Prisma.School$academicYearsArgs<ExtArgs>
   branches?: boolean | Prisma.School$branchesArgs<ExtArgs>
   users?: boolean | Prisma.School$usersArgs<ExtArgs>
+  students?: boolean | Prisma.School$studentsArgs<ExtArgs>
+  teachers?: boolean | Prisma.School$teachersArgs<ExtArgs>
+  parents?: boolean | Prisma.School$parentsArgs<ExtArgs>
+  classes?: boolean | Prisma.School$classesArgs<ExtArgs>
+  sections?: boolean | Prisma.School$sectionsArgs<ExtArgs>
+  subjects?: boolean | Prisma.School$subjectsArgs<ExtArgs>
+  courses?: boolean | Prisma.School$coursesArgs<ExtArgs>
+  enrollments?: boolean | Prisma.School$enrollmentsArgs<ExtArgs>
+  attendance?: boolean | Prisma.School$attendanceArgs<ExtArgs>
+  assignments?: boolean | Prisma.School$assignmentsArgs<ExtArgs>
+  exams?: boolean | Prisma.School$examsArgs<ExtArgs>
+  results?: boolean | Prisma.School$resultsArgs<ExtArgs>
+  notifications?: boolean | Prisma.School$notificationsArgs<ExtArgs>
+  files?: boolean | Prisma.School$filesArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.School$auditLogsArgs<ExtArgs>
+  teacherClasses?: boolean | Prisma.School$teacherClassesArgs<ExtArgs>
+  communities?: boolean | Prisma.School$communitiesArgs<ExtArgs>
+  posts?: boolean | Prisma.School$postsArgs<ExtArgs>
+  comments?: boolean | Prisma.School$commentsArgs<ExtArgs>
+  votes?: boolean | Prisma.School$votesArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SchoolIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1060,6 +5507,26 @@ export type $SchoolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     academicYears: Prisma.$AcademicYearPayload<ExtArgs>[]
     branches: Prisma.$BranchPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
+    students: Prisma.$StudentPayload<ExtArgs>[]
+    teachers: Prisma.$TeacherPayload<ExtArgs>[]
+    parents: Prisma.$ParentPayload<ExtArgs>[]
+    classes: Prisma.$ClassPayload<ExtArgs>[]
+    sections: Prisma.$SectionPayload<ExtArgs>[]
+    subjects: Prisma.$SubjectPayload<ExtArgs>[]
+    courses: Prisma.$CoursePayload<ExtArgs>[]
+    enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
+    attendance: Prisma.$AttendancePayload<ExtArgs>[]
+    assignments: Prisma.$AssignmentPayload<ExtArgs>[]
+    exams: Prisma.$ExamPayload<ExtArgs>[]
+    results: Prisma.$ResultPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    files: Prisma.$MediaFilePayload<ExtArgs>[]
+    auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+    teacherClasses: Prisma.$TeacherClassPayload<ExtArgs>[]
+    communities: Prisma.$CommunityPayload<ExtArgs>[]
+    posts: Prisma.$PostPayload<ExtArgs>[]
+    comments: Prisma.$CommentPayload<ExtArgs>[]
+    votes: Prisma.$VotePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1076,6 +5543,7 @@ export type $SchoolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     logo: string | null
     status: $Enums.SchoolStatus
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["school"]>
   composites: {}
 }
@@ -1473,6 +5941,26 @@ export interface Prisma__SchoolClient<T, Null = never, ExtArgs extends runtime.T
   academicYears<T extends Prisma.School$academicYearsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$academicYearsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   branches<T extends Prisma.School$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.School$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  students<T extends Prisma.School$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teachers<T extends Prisma.School$teachersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$teachersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeacherPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  parents<T extends Prisma.School$parentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$parentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ParentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classes<T extends Prisma.School$classesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$classesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sections<T extends Prisma.School$sectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$sectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subjects<T extends Prisma.School$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  courses<T extends Prisma.School$coursesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  enrollments<T extends Prisma.School$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attendance<T extends Prisma.School$attendanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$attendanceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignments<T extends Prisma.School$assignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  exams<T extends Prisma.School$examsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$examsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  results<T extends Prisma.School$resultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$resultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.School$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  files<T extends Prisma.School$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditLogs<T extends Prisma.School$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teacherClasses<T extends Prisma.School$teacherClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$teacherClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeacherClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  communities<T extends Prisma.School$communitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$communitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  posts<T extends Prisma.School$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comments<T extends Prisma.School$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  votes<T extends Prisma.School$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.School$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1516,6 +6004,7 @@ export interface SchoolFieldRefs {
   readonly logo: Prisma.FieldRef<"School", 'String'>
   readonly status: Prisma.FieldRef<"School", 'SchoolStatus'>
   readonly createdAt: Prisma.FieldRef<"School", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"School", 'DateTime'>
 }
     
 
@@ -1978,6 +6467,486 @@ export type School$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * School.students
+ */
+export type School$studentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Student
+   */
+  select?: Prisma.StudentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Student
+   */
+  omit?: Prisma.StudentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StudentInclude<ExtArgs> | null
+  where?: Prisma.StudentWhereInput
+  orderBy?: Prisma.StudentOrderByWithRelationInput | Prisma.StudentOrderByWithRelationInput[]
+  cursor?: Prisma.StudentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StudentScalarFieldEnum | Prisma.StudentScalarFieldEnum[]
+}
+
+/**
+ * School.teachers
+ */
+export type School$teachersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Teacher
+   */
+  select?: Prisma.TeacherSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Teacher
+   */
+  omit?: Prisma.TeacherOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeacherInclude<ExtArgs> | null
+  where?: Prisma.TeacherWhereInput
+  orderBy?: Prisma.TeacherOrderByWithRelationInput | Prisma.TeacherOrderByWithRelationInput[]
+  cursor?: Prisma.TeacherWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeacherScalarFieldEnum | Prisma.TeacherScalarFieldEnum[]
+}
+
+/**
+ * School.parents
+ */
+export type School$parentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Parent
+   */
+  select?: Prisma.ParentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Parent
+   */
+  omit?: Prisma.ParentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ParentInclude<ExtArgs> | null
+  where?: Prisma.ParentWhereInput
+  orderBy?: Prisma.ParentOrderByWithRelationInput | Prisma.ParentOrderByWithRelationInput[]
+  cursor?: Prisma.ParentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ParentScalarFieldEnum | Prisma.ParentScalarFieldEnum[]
+}
+
+/**
+ * School.classes
+ */
+export type School$classesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Class
+   */
+  select?: Prisma.ClassSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Class
+   */
+  omit?: Prisma.ClassOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassInclude<ExtArgs> | null
+  where?: Prisma.ClassWhereInput
+  orderBy?: Prisma.ClassOrderByWithRelationInput | Prisma.ClassOrderByWithRelationInput[]
+  cursor?: Prisma.ClassWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassScalarFieldEnum | Prisma.ClassScalarFieldEnum[]
+}
+
+/**
+ * School.sections
+ */
+export type School$sectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Section
+   */
+  select?: Prisma.SectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Section
+   */
+  omit?: Prisma.SectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SectionInclude<ExtArgs> | null
+  where?: Prisma.SectionWhereInput
+  orderBy?: Prisma.SectionOrderByWithRelationInput | Prisma.SectionOrderByWithRelationInput[]
+  cursor?: Prisma.SectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SectionScalarFieldEnum | Prisma.SectionScalarFieldEnum[]
+}
+
+/**
+ * School.subjects
+ */
+export type School$subjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subject
+   */
+  select?: Prisma.SubjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subject
+   */
+  omit?: Prisma.SubjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubjectInclude<ExtArgs> | null
+  where?: Prisma.SubjectWhereInput
+  orderBy?: Prisma.SubjectOrderByWithRelationInput | Prisma.SubjectOrderByWithRelationInput[]
+  cursor?: Prisma.SubjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubjectScalarFieldEnum | Prisma.SubjectScalarFieldEnum[]
+}
+
+/**
+ * School.courses
+ */
+export type School$coursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Course
+   */
+  select?: Prisma.CourseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Course
+   */
+  omit?: Prisma.CourseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CourseInclude<ExtArgs> | null
+  where?: Prisma.CourseWhereInput
+  orderBy?: Prisma.CourseOrderByWithRelationInput | Prisma.CourseOrderByWithRelationInput[]
+  cursor?: Prisma.CourseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CourseScalarFieldEnum | Prisma.CourseScalarFieldEnum[]
+}
+
+/**
+ * School.enrollments
+ */
+export type School$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Enrollment
+   */
+  select?: Prisma.EnrollmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Enrollment
+   */
+  omit?: Prisma.EnrollmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EnrollmentInclude<ExtArgs> | null
+  where?: Prisma.EnrollmentWhereInput
+  orderBy?: Prisma.EnrollmentOrderByWithRelationInput | Prisma.EnrollmentOrderByWithRelationInput[]
+  cursor?: Prisma.EnrollmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EnrollmentScalarFieldEnum | Prisma.EnrollmentScalarFieldEnum[]
+}
+
+/**
+ * School.attendance
+ */
+export type School$attendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attendance
+   */
+  select?: Prisma.AttendanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attendance
+   */
+  omit?: Prisma.AttendanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttendanceInclude<ExtArgs> | null
+  where?: Prisma.AttendanceWhereInput
+  orderBy?: Prisma.AttendanceOrderByWithRelationInput | Prisma.AttendanceOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceScalarFieldEnum | Prisma.AttendanceScalarFieldEnum[]
+}
+
+/**
+ * School.assignments
+ */
+export type School$assignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Assignment
+   */
+  select?: Prisma.AssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Assignment
+   */
+  omit?: Prisma.AssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssignmentInclude<ExtArgs> | null
+  where?: Prisma.AssignmentWhereInput
+  orderBy?: Prisma.AssignmentOrderByWithRelationInput | Prisma.AssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.AssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssignmentScalarFieldEnum | Prisma.AssignmentScalarFieldEnum[]
+}
+
+/**
+ * School.exams
+ */
+export type School$examsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Exam
+   */
+  select?: Prisma.ExamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Exam
+   */
+  omit?: Prisma.ExamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExamInclude<ExtArgs> | null
+  where?: Prisma.ExamWhereInput
+  orderBy?: Prisma.ExamOrderByWithRelationInput | Prisma.ExamOrderByWithRelationInput[]
+  cursor?: Prisma.ExamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExamScalarFieldEnum | Prisma.ExamScalarFieldEnum[]
+}
+
+/**
+ * School.results
+ */
+export type School$resultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Result
+   */
+  select?: Prisma.ResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Result
+   */
+  omit?: Prisma.ResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResultInclude<ExtArgs> | null
+  where?: Prisma.ResultWhereInput
+  orderBy?: Prisma.ResultOrderByWithRelationInput | Prisma.ResultOrderByWithRelationInput[]
+  cursor?: Prisma.ResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResultScalarFieldEnum | Prisma.ResultScalarFieldEnum[]
+}
+
+/**
+ * School.notifications
+ */
+export type School$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * School.files
+ */
+export type School$filesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaFile
+   */
+  select?: Prisma.MediaFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaFile
+   */
+  omit?: Prisma.MediaFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaFileInclude<ExtArgs> | null
+  where?: Prisma.MediaFileWhereInput
+  orderBy?: Prisma.MediaFileOrderByWithRelationInput | Prisma.MediaFileOrderByWithRelationInput[]
+  cursor?: Prisma.MediaFileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaFileScalarFieldEnum | Prisma.MediaFileScalarFieldEnum[]
+}
+
+/**
+ * School.auditLogs
+ */
+export type School$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditLog
+   */
+  select?: Prisma.AuditLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditLog
+   */
+  omit?: Prisma.AuditLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditLogInclude<ExtArgs> | null
+  where?: Prisma.AuditLogWhereInput
+  orderBy?: Prisma.AuditLogOrderByWithRelationInput | Prisma.AuditLogOrderByWithRelationInput[]
+  cursor?: Prisma.AuditLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * School.teacherClasses
+ */
+export type School$teacherClassesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeacherClass
+   */
+  select?: Prisma.TeacherClassSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeacherClass
+   */
+  omit?: Prisma.TeacherClassOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeacherClassInclude<ExtArgs> | null
+  where?: Prisma.TeacherClassWhereInput
+  orderBy?: Prisma.TeacherClassOrderByWithRelationInput | Prisma.TeacherClassOrderByWithRelationInput[]
+  cursor?: Prisma.TeacherClassWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeacherClassScalarFieldEnum | Prisma.TeacherClassScalarFieldEnum[]
+}
+
+/**
+ * School.communities
+ */
+export type School$communitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Community
+   */
+  select?: Prisma.CommunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Community
+   */
+  omit?: Prisma.CommunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommunityInclude<ExtArgs> | null
+  where?: Prisma.CommunityWhereInput
+  orderBy?: Prisma.CommunityOrderByWithRelationInput | Prisma.CommunityOrderByWithRelationInput[]
+  cursor?: Prisma.CommunityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommunityScalarFieldEnum | Prisma.CommunityScalarFieldEnum[]
+}
+
+/**
+ * School.posts
+ */
+export type School$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Post
+   */
+  select?: Prisma.PostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Post
+   */
+  omit?: Prisma.PostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PostInclude<ExtArgs> | null
+  where?: Prisma.PostWhereInput
+  orderBy?: Prisma.PostOrderByWithRelationInput | Prisma.PostOrderByWithRelationInput[]
+  cursor?: Prisma.PostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[]
+}
+
+/**
+ * School.comments
+ */
+export type School$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Comment
+   */
+  select?: Prisma.CommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Comment
+   */
+  omit?: Prisma.CommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommentInclude<ExtArgs> | null
+  where?: Prisma.CommentWhereInput
+  orderBy?: Prisma.CommentOrderByWithRelationInput | Prisma.CommentOrderByWithRelationInput[]
+  cursor?: Prisma.CommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * School.votes
+ */
+export type School$votesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Vote
+   */
+  select?: Prisma.VoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Vote
+   */
+  omit?: Prisma.VoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VoteInclude<ExtArgs> | null
+  where?: Prisma.VoteWhereInput
+  orderBy?: Prisma.VoteOrderByWithRelationInput | Prisma.VoteOrderByWithRelationInput[]
+  cursor?: Prisma.VoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VoteScalarFieldEnum | Prisma.VoteScalarFieldEnum[]
 }
 
 /**

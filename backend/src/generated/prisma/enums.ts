@@ -33,7 +33,9 @@ export type SchoolLevel = (typeof SchoolLevel)[keyof typeof SchoolLevel]
 
 export const SchoolStatus = {
   ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE'
+  INACTIVE: 'INACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  PENDING: 'PENDING'
 } as const
 
 export type SchoolStatus = (typeof SchoolStatus)[keyof typeof SchoolStatus]
@@ -59,7 +61,190 @@ export type BranchStatus = (typeof BranchStatus)[keyof typeof BranchStatus]
 export const UserStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
-  SUSPENDED: 'SUSPENDED'
+  SUSPENDED: 'SUSPENDED',
+  PENDING: 'PENDING'
 } as const
 
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const CommunityType = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type CommunityType = (typeof CommunityType)[keyof typeof CommunityType]
+
+
+export const CommunityMemberRole = {
+  OWNER: 'OWNER',
+  MODERATOR: 'MODERATOR',
+  MEMBER: 'MEMBER'
+} as const
+
+export type CommunityMemberRole = (typeof CommunityMemberRole)[keyof typeof CommunityMemberRole]
+
+
+export const VoteTarget = {
+  POST: 'POST',
+  COMMENT: 'COMMENT'
+} as const
+
+export type VoteTarget = (typeof VoteTarget)[keyof typeof VoteTarget]
+
+
+export const StudentStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  GRADUATED: 'GRADUATED',
+  TRANSFERRED: 'TRANSFERRED'
+} as const
+
+export type StudentStatus = (typeof StudentStatus)[keyof typeof StudentStatus]
+
+
+export const TeacherStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type TeacherStatus = (typeof TeacherStatus)[keyof typeof TeacherStatus]
+
+
+export const ParentStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type ParentStatus = (typeof ParentStatus)[keyof typeof ParentStatus]
+
+
+export const ClassStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type ClassStatus = (typeof ClassStatus)[keyof typeof ClassStatus]
+
+
+export const SectionStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SectionStatus = (typeof SectionStatus)[keyof typeof SectionStatus]
+
+
+export const SubjectStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type SubjectStatus = (typeof SubjectStatus)[keyof typeof SubjectStatus]
+
+
+export const CourseStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type CourseStatus = (typeof CourseStatus)[keyof typeof CourseStatus]
+
+
+export const EnrollmentStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  DROPPED: 'DROPPED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type EnrollmentStatus = (typeof EnrollmentStatus)[keyof typeof EnrollmentStatus]
+
+
+export const AttendanceStatus = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  LATE: 'LATE',
+  EXCUSED: 'EXCUSED'
+} as const
+
+export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
+
+
+export const AssignmentStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type AssignmentStatus = (typeof AssignmentStatus)[keyof typeof AssignmentStatus]
+
+
+export const AssignmentSubmissionStatus = {
+  SUBMITTED: 'SUBMITTED',
+  GRADED: 'GRADED',
+  LATE: 'LATE'
+} as const
+
+export type AssignmentSubmissionStatus = (typeof AssignmentSubmissionStatus)[keyof typeof AssignmentSubmissionStatus]
+
+
+export const ExamStatus = {
+  DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
+  ONGOING: 'ONGOING',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ExamStatus = (typeof ExamStatus)[keyof typeof ExamStatus]
+
+
+export const NotificationType = {
+  INFO: 'INFO',
+  WARNING: 'WARNING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+  ANNOUNCEMENT: 'ANNOUNCEMENT'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const FileCategory = {
+  PROFILE_IMAGE: 'PROFILE_IMAGE',
+  SCHOOL_LOGO: 'SCHOOL_LOGO',
+  ASSIGNMENT: 'ASSIGNMENT',
+  DOCUMENT: 'DOCUMENT',
+  OTHER: 'OTHER'
+} as const
+
+export type FileCategory = (typeof FileCategory)[keyof typeof FileCategory]
+
+
+export const StorageProvider = {
+  LOCAL: 'LOCAL',
+  S3: 'S3',
+  CLOUDINARY: 'CLOUDINARY',
+  OTHER: 'OTHER'
+} as const
+
+export type StorageProvider = (typeof StorageProvider)[keyof typeof StorageProvider]
+
+
+export const ParentChildRelationship = {
+  FATHER: 'FATHER',
+  MOTHER: 'MOTHER',
+  GUARDIAN: 'GUARDIAN',
+  OTHER: 'OTHER'
+} as const
+
+export type ParentChildRelationship = (typeof ParentChildRelationship)[keyof typeof ParentChildRelationship]

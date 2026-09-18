@@ -1,0 +1,33 @@
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { EnrollmentStatus } from '../../../generated/prisma/client.js';
+
+export class CreateEnrollmentDto {
+  @IsString()
+  @IsNotEmpty()
+  studentId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  classId: string;
+
+  @IsOptional()
+  @IsString()
+  sectionId?: string;
+
+  @IsString()
+  @IsNotEmpty()
+  academicYearId: string;
+
+  @IsOptional()
+  @IsEnum(EnrollmentStatus)
+  status?: EnrollmentStatus;
+
+  @IsOptional()
+  @IsString()
+  schoolId?: string;
+}

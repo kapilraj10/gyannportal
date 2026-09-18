@@ -13,7 +13,13 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  onLogin,
+  onRegister,
+}: {
+  onLogin?: () => void;
+  onRegister?: () => void;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -68,18 +74,18 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#"
+          <button
+            onClick={onLogin}
             className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-primary-500 transition-colors"
           >
             Login
-          </a>
-          <a
-            href="#"
+          </button>
+          <button
+            onClick={onRegister}
             className="px-5 py-2.5 text-sm font-semibold text-white bg-primary-500 rounded-xl hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-500/25 active:scale-[0.97]"
           >
             Get Started
-          </a>
+          </button>
         </div>
 
         <button
@@ -121,18 +127,24 @@ export default function Navbar() {
               </a>
             ))}
             <div className="mt-4 flex flex-col gap-3 w-full max-w-xs">
-              <a
-                href="#"
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  onLogin?.();
+                }}
                 className="w-full text-center px-4 py-3 text-base font-medium text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
               >
                 Login
-              </a>
-              <a
-                href="#"
+              </button>
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  onRegister?.();
+                }}
                 className="w-full text-center px-4 py-3 text-base font-semibold text-white bg-primary-500 rounded-xl hover:bg-primary-600 transition-all"
               >
                 Get Started
-              </a>
+              </button>
             </div>
           </div>
         </div>

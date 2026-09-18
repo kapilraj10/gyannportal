@@ -143,7 +143,7 @@ function DashboardMockup() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ onRegister }: { onRegister?: () => void }) {
   const headingRef = useInView(0.2);
   const contentRef = useInView(0.2);
 
@@ -179,15 +179,15 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
-              <a
-                href="#"
+              <button
+                onClick={onRegister}
                 className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-white bg-primary-500 rounded-xl hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-500/25 active:scale-[0.97]"
               >
                 Get Started Free
                 <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
-              </a>
+              </button>
               <a
                 href="#features"
                 className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:border-slate-300 hover:bg-slate-50 transition-all"

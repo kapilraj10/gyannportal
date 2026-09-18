@@ -52,3 +52,123 @@ export type Permission = Prisma.PermissionModel
  * 
  */
 export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
+/**
+ * Model Student
+ * 
+ */
+export type Student = Prisma.StudentModel
+/**
+ * Model Teacher
+ * 
+ */
+export type Teacher = Prisma.TeacherModel
+/**
+ * Model Parent
+ * 
+ */
+export type Parent = Prisma.ParentModel
+/**
+ * Model ParentStudent
+ * 
+ */
+export type ParentStudent = Prisma.ParentStudentModel
+/**
+ * Model Class
+ * 
+ */
+export type Class = Prisma.ClassModel
+/**
+ * Model Section
+ * 
+ */
+export type Section = Prisma.SectionModel
+/**
+ * Model Subject
+ * 
+ */
+export type Subject = Prisma.SubjectModel
+/**
+ * Model Course
+ * 
+ */
+export type Course = Prisma.CourseModel
+/**
+ * Model TeacherClass
+ * 
+ */
+export type TeacherClass = Prisma.TeacherClassModel
+/**
+ * Model Enrollment
+ * 
+ */
+export type Enrollment = Prisma.EnrollmentModel
+/**
+ * Model Attendance
+ * 
+ */
+export type Attendance = Prisma.AttendanceModel
+/**
+ * Model Assignment
+ * 
+ */
+export type Assignment = Prisma.AssignmentModel
+/**
+ * Model AssignmentSubmission
+ * 
+ */
+export type AssignmentSubmission = Prisma.AssignmentSubmissionModel
+/**
+ * Model Exam
+ * 
+ */
+export type Exam = Prisma.ExamModel
+/**
+ * Model Result
+ * 
+ */
+export type Result = Prisma.ResultModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model MediaFile
+ * 
+ */
+export type MediaFile = Prisma.MediaFileModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model Community
+ * 
+ */
+export type Community = Prisma.CommunityModel
+/**
+ * Model CommunityMember
+ * 
+ */
+export type CommunityMember = Prisma.CommunityMemberModel
+/**
+ * Model Post
+ * 
+ */
+export type Post = Prisma.PostModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
+/**
+ * Model Vote
+ * 
+ */
+export type Vote = Prisma.VoteModel

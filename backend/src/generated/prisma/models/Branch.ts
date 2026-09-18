@@ -29,7 +29,10 @@ export type BranchMinAggregateOutputType = {
   schoolId: string | null
   name: string | null
   address: string | null
+  phone: string | null
   status: $Enums.BranchStatus | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type BranchMaxAggregateOutputType = {
@@ -37,7 +40,10 @@ export type BranchMaxAggregateOutputType = {
   schoolId: string | null
   name: string | null
   address: string | null
+  phone: string | null
   status: $Enums.BranchStatus | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type BranchCountAggregateOutputType = {
@@ -45,7 +51,10 @@ export type BranchCountAggregateOutputType = {
   schoolId: number
   name: number
   address: number
+  phone: number
   status: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -55,7 +64,10 @@ export type BranchMinAggregateInputType = {
   schoolId?: true
   name?: true
   address?: true
+  phone?: true
   status?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type BranchMaxAggregateInputType = {
@@ -63,7 +75,10 @@ export type BranchMaxAggregateInputType = {
   schoolId?: true
   name?: true
   address?: true
+  phone?: true
   status?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type BranchCountAggregateInputType = {
@@ -71,7 +86,10 @@ export type BranchCountAggregateInputType = {
   schoolId?: true
   name?: true
   address?: true
+  phone?: true
   status?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -152,7 +170,10 @@ export type BranchGroupByOutputType = {
   schoolId: string
   name: string
   address: string | null
+  phone: string | null
   status: $Enums.BranchStatus
+  createdAt: Date
+  updatedAt: Date
   _count: BranchCountAggregateOutputType | null
   _min: BranchMinAggregateOutputType | null
   _max: BranchMaxAggregateOutputType | null
@@ -181,7 +202,10 @@ export type BranchWhereInput = {
   schoolId?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
   address?: Prisma.StringNullableFilter<"Branch"> | string | null
+  phone?: Prisma.StringNullableFilter<"Branch"> | string | null
   status?: Prisma.EnumBranchStatusFilter<"Branch"> | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   users?: Prisma.UserListRelationFilter
 }
@@ -191,7 +215,10 @@ export type BranchOrderByWithRelationInput = {
   schoolId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
   users?: Prisma.UserOrderByRelationAggregateInput
 }
@@ -205,7 +232,10 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   schoolId?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
   address?: Prisma.StringNullableFilter<"Branch"> | string | null
+  phone?: Prisma.StringNullableFilter<"Branch"> | string | null
   status?: Prisma.EnumBranchStatusFilter<"Branch"> | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   users?: Prisma.UserListRelationFilter
 }, "id" | "schoolId_name">
@@ -215,7 +245,10 @@ export type BranchOrderByWithAggregationInput = {
   schoolId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.BranchCountOrderByAggregateInput
   _max?: Prisma.BranchMaxOrderByAggregateInput
   _min?: Prisma.BranchMinOrderByAggregateInput
@@ -229,14 +262,20 @@ export type BranchScalarWhereWithAggregatesInput = {
   schoolId?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   name?: Prisma.StringWithAggregatesFilter<"Branch"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   status?: Prisma.EnumBranchStatusWithAggregatesFilter<"Branch"> | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
 }
 
 export type BranchCreateInput = {
   id?: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutBranchesInput
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
 }
@@ -246,7 +285,10 @@ export type BranchUncheckedCreateInput = {
   schoolId: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
 }
 
@@ -254,7 +296,10 @@ export type BranchUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutBranchesNestedInput
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
 }
@@ -264,7 +309,10 @@ export type BranchUncheckedUpdateInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
 }
 
@@ -273,14 +321,20 @@ export type BranchCreateManyInput = {
   schoolId: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BranchUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BranchUncheckedUpdateManyInput = {
@@ -288,7 +342,10 @@ export type BranchUncheckedUpdateManyInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BranchListRelationFilter = {
@@ -311,7 +368,10 @@ export type BranchCountOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type BranchMaxOrderByAggregateInput = {
@@ -319,7 +379,10 @@ export type BranchMaxOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type BranchMinOrderByAggregateInput = {
@@ -327,7 +390,10 @@ export type BranchMinOrderByAggregateInput = {
   schoolId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type BranchNullableScalarRelationFilter = {
@@ -401,7 +467,10 @@ export type BranchCreateWithoutSchoolInput = {
   id?: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutBranchInput
 }
 
@@ -409,7 +478,10 @@ export type BranchUncheckedCreateWithoutSchoolInput = {
   id?: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutBranchInput
 }
 
@@ -447,14 +519,20 @@ export type BranchScalarWhereInput = {
   schoolId?: Prisma.StringFilter<"Branch"> | string
   name?: Prisma.StringFilter<"Branch"> | string
   address?: Prisma.StringNullableFilter<"Branch"> | string | null
+  phone?: Prisma.StringNullableFilter<"Branch"> | string | null
   status?: Prisma.EnumBranchStatusFilter<"Branch"> | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
 }
 
 export type BranchCreateWithoutUsersInput = {
   id?: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
   school: Prisma.SchoolCreateNestedOneWithoutBranchesInput
 }
 
@@ -463,7 +541,10 @@ export type BranchUncheckedCreateWithoutUsersInput = {
   schoolId: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BranchCreateOrConnectWithoutUsersInput = {
@@ -486,7 +567,10 @@ export type BranchUpdateWithoutUsersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   school?: Prisma.SchoolUpdateOneRequiredWithoutBranchesNestedInput
 }
 
@@ -495,21 +579,30 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BranchCreateManySchoolInput = {
   id?: string
   name: string
   address?: string | null
+  phone?: string | null
   status?: $Enums.BranchStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type BranchUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutBranchNestedInput
 }
 
@@ -517,7 +610,10 @@ export type BranchUncheckedUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutBranchNestedInput
 }
 
@@ -525,7 +621,10 @@ export type BranchUncheckedUpdateManyWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumBranchStatusFieldUpdateOperationsInput | $Enums.BranchStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -564,7 +663,10 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   schoolId?: boolean
   name?: boolean
   address?: boolean
+  phone?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
@@ -575,7 +677,10 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   schoolId?: boolean
   name?: boolean
   address?: boolean
+  phone?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -584,7 +689,10 @@ export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   schoolId?: boolean
   name?: boolean
   address?: boolean
+  phone?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -593,10 +701,13 @@ export type BranchSelectScalar = {
   schoolId?: boolean
   name?: boolean
   address?: boolean
+  phone?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "schoolId" | "name" | "address" | "status", ExtArgs["result"]["branch"]>
+export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "schoolId" | "name" | "address" | "phone" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
 export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
@@ -620,7 +731,10 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     schoolId: string
     name: string
     address: string | null
+    phone: string | null
     status: $Enums.BranchStatus
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["branch"]>
   composites: {}
 }
@@ -1050,7 +1164,10 @@ export interface BranchFieldRefs {
   readonly schoolId: Prisma.FieldRef<"Branch", 'String'>
   readonly name: Prisma.FieldRef<"Branch", 'String'>
   readonly address: Prisma.FieldRef<"Branch", 'String'>
+  readonly phone: Prisma.FieldRef<"Branch", 'String'>
   readonly status: Prisma.FieldRef<"Branch", 'BranchStatus'>
+  readonly createdAt: Prisma.FieldRef<"Branch", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Branch", 'DateTime'>
 }
     
 

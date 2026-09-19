@@ -1,154 +1,172 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
   { label: "Features", href: "#features" },
-  { label: "Solutions", href: "#roles" },
+  { label: "Solutions", href: "#solutions" },
   { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "FAQ", href: "#faq" },
 ];
 
-export default function Navbar({
-  onLogin,
-  onRegister,
-}: {
+interface NavbarProps {
   onLogin?: () => void;
   onRegister?: () => void;
-}) {
+}
+
+function Logo() {
+  return (
+    <Link href="/" className="group flex items-center gap-2.5" aria-label="GyannPortal home">
+      <Image
+        src="/logo1.png"
+        alt="GyannPortal logo"
+        width={96}
+        height={48}
+        priority
+        className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+      />
+      <span className="text-lg font-bold tracking-tight text-deep-900">
+        Gyan<span className="text-primary-500">n</span>Portal
+      </span>
+    </Link>
+  );
+}
+
+export default function Navbar({ onLogin, onRegister }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
+    };
   }, [mobileOpen]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "glass border-b border-white/20 shadow-sm py-3"
-          : "bg-transparent py-5"
+          ? "glass border-b border-deep-100/70 py-2.5 shadow-[0_1px_0_rgba(15,23,42,0.02),0_8px_30px_-12px_rgba(15,23,42,0.12)]"
+          : "border-b border-transparent py-4"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <Image
-            src="/logo1.png"
-            alt="GyannPortal logo"
-            width={1536}
-            height={1024}
-            priority
-            className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
-          />
-          <span className="text-xl font-bold tracking-tight text-slate-900 hidden sm:inline">
-            Gyan<span className="text-primary-500">n</span>Portal
-          </span>
-        </Link>
+      <nav className="container-px flex max-w-7xl items-center justify-between">
+        <Logo />
 
-        <div className="hidden md:flex items-center gap-1">
+        {/* Desktop links */}
+        <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-500 rounded-lg hover:bg-primary-50 transition-colors"
+              className="group relative rounded-lg px-3.5 py-2 text-sm font-medium text-deep-600 transition-colors hover:text-deep-900"
             >
               {link.label}
+              <span className="absolute inset-x-3.5 -bottom-0.5 h-px origin-left scale-x-0 bg-primary-500 transition-transform duration-300 group-hover:scale-x-100" />
             </a>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-2 md:flex">
           <button
             onClick={onLogin}
-            className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-primary-500 transition-colors"
+            className="rounded-lg px-4 py-2 text-sm font-medium text-deep-700 transition-colors hover:bg-deep-100/60 hover:text-deep-900"
           >
             Login
           </button>
           <button
             onClick={onRegister}
-            className="px-5 py-2.5 text-sm font-semibold text-white bg-primary-500 rounded-xl hover:bg-primary-600 transition-all hover:shadow-lg hover:shadow-primary-500/25 active:scale-[0.97]"
+            className="group inline-flex items-center gap-1.5 rounded-lg bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-lg hover:shadow-primary-500/25 active:translate-y-0 active:scale-[0.98]"
           >
             Get Started
+            <svg
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </button>
         </div>
 
+        {/* Mobile toggle */}
         <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 transition-colors"
-          aria-label="Toggle menu"
+          onClick={() => setMobileOpen((v) => !v)}
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-deep-700 transition-colors hover:bg-deep-100/70 md:hidden"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
         >
-          <div className="w-5 flex flex-col gap-1.5">
-            <span
-              className={`w-full h-0.5 bg-slate-700 rounded-full transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`w-full h-0.5 bg-slate-700 rounded-full transition-all duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`w-full h-0.5 bg-slate-700 rounded-full transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </div>
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
 
-      {mobileOpen && (
-        <div className="md:hidden fixed inset-0 top-0 bg-white/95 backdrop-blur-xl z-40 pt-20">
-          <div className="flex flex-col items-center gap-2 p-6">
+      {/* Mobile menu */}
+      <div
+        className={`fixed inset-x-0 top-0 z-40 origin-top bg-white/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
+          mobileOpen
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-3 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col px-6 pb-8 pt-24">
+          <div className="flex flex-col divide-y divide-deep-100/80">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="w-full text-center px-4 py-3 text-lg font-medium text-slate-700 hover:text-primary-500 rounded-xl hover:bg-primary-50 transition-colors"
+                className="flex items-center justify-between py-4 text-lg font-medium text-deep-800 transition-colors hover:text-primary-600"
               >
                 {link.label}
+                <svg
+                  className="h-4 w-4 text-deep-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
             ))}
-            <div className="mt-4 flex flex-col gap-3 w-full max-w-xs">
-              <button
-                onClick={() => {
-                  setMobileOpen(false);
-                  onLogin?.();
-                }}
-                className="w-full text-center px-4 py-3 text-base font-medium text-slate-700 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => {
-                  setMobileOpen(false);
-                  onRegister?.();
-                }}
-                className="w-full text-center px-4 py-3 text-base font-semibold text-white bg-primary-500 rounded-xl hover:bg-primary-600 transition-all"
-              >
-                Get Started
-              </button>
-            </div>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3">
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                onLogin?.();
+              }}
+              className="w-full rounded-xl border border-deep-200 px-4 py-3.5 text-base font-semibold text-deep-800 transition-colors hover:bg-deep-50"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                onRegister?.();
+              }}
+              className="w-full rounded-xl bg-primary-500 px-4 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-primary-600"
+            >
+              Get Started
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

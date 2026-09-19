@@ -1,41 +1,27 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState } from "react";
+import Reveal from "./shared/Reveal";
+import SectionHeading from "./shared/SectionHeading";
 
-function useInView(threshold = 0.1) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("animate-fade-up");
-          observer.unobserve(el);
-        }
-      },
-      { threshold }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
-  return ref;
+type RoleKey = "admin" | "teacher" | "student" | "parent";
+
+interface Role {
+  key: RoleKey;
+  tab: string;
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
 }
 
-const roles = [
+const roles: Role[] = [
   {
+    key: "admin",
+    tab: "Administrators",
     title: "School Admin",
-    description: "Complete control over school operations.",
-    color: "from-primary-500 to-primary-600",
-    bgColor: "bg-primary-50",
-    textColor: "text-primary-600",
-    borderColor: "border-primary-100",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93s.844.083 1.186-.19l.716-.57c.51-.41 1.258-.357 1.705.105l.763.763c.448.448.5 1.196.105 1.705l-.57.716c-.274.342-.276.784-.19 1.186s.506.71.93.78l.894.15c.542.09.94.56.94 1.109v1.094c0 .55-.398 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.93.78s-.083.844.19 1.186l.57.716c.41.51.357 1.258-.105 1.705l-.763.763c-.448.448-1.196.5-1.705.105l-.716-.57c-.342-.274-.784-.276-1.186-.19s-.71.506-.78.93l-.15.894c-.09.542-.56.94-1.109.94h-1.094c-.55 0-1.02-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93s-.844-.083-1.185.19l-.716.57c-.51.41-1.258.357-1.705-.105l-.763-.763c-.448-.448-.5-1.196-.105-1.705l.57-.716c.274-.342.276-.784.19-1.186s-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.148c.424-.071.764-.384.93-.781s.083-.844-.19-1.185l-.57-.716c-.41-.51-.357-1.258.105-1.705l.763-.763c.448-.448 1.196-.5 1.705-.105l.716.57c.342.274.784.276 1.186.19s.71-.506.78-.93l.15-.894Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-      </svg>
-    ),
+    description: "Complete control over school operations, finance and analytics.",
+    icon: "M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342",
     features: [
       "School-wide analytics dashboard",
       "Teacher & staff management",
@@ -45,17 +31,11 @@ const roles = [
     ],
   },
   {
-    title: "Teacher",
-    description: "Manage classes, attendance, assignments, exams, and students.",
-    color: "from-emerald-500 to-emerald-600",
-    bgColor: "bg-emerald-50",
-    textColor: "text-emerald-600",
-    borderColor: "border-emerald-100",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
-      </svg>
-    ),
+    key: "teacher",
+    tab: "Teachers",
+    title: "Teachers",
+    description: "Manage classes, attendance, assignments, exams and students.",
+    icon: "M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387",
     features: [
       "Class & student overview",
       "Take attendance in seconds",
@@ -65,17 +45,11 @@ const roles = [
     ],
   },
   {
-    title: "Student",
-    description: "Access classes, assignments, exams, results, and announcements.",
-    color: "from-violet-500 to-violet-600",
-    bgColor: "bg-violet-50",
-    textColor: "text-violet-600",
-    borderColor: "border-violet-100",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-      </svg>
-    ),
+    key: "student",
+    tab: "Students",
+    title: "Students",
+    description: "Access classes, assignments, exams, results and announcements.",
+    icon: "M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347",
     features: [
       "View timetable & schedules",
       "Submit assignments online",
@@ -85,17 +59,11 @@ const roles = [
     ],
   },
   {
-    title: "Parent",
-    description: "Monitor attendance, academic performance, fees, notices, and activities.",
-    color: "from-amber-500 to-amber-600",
-    bgColor: "bg-amber-50",
-    textColor: "text-amber-600",
-    borderColor: "border-amber-100",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-      </svg>
-    ),
+    key: "parent",
+    tab: "Parents",
+    title: "Parents",
+    description: "Monitor attendance, academic performance, fees, notices and activities.",
+    icon: "M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719",
     features: [
       "Real-time attendance alerts",
       "View report cards",
@@ -106,53 +74,252 @@ const roles = [
   },
 ];
 
-function RoleCard({ role }: { role: typeof roles[0] }) {
+/* ------------------------------------------------------------------ */
+/* Role preview panels                                                 */
+/* ------------------------------------------------------------------ */
+
+function AdminPreview() {
   return (
-    <div className={`group relative p-6 rounded-2xl border ${role.borderColor} bg-white hover:${role.bgColor} card-shadow hover:card-shadow-lg transition-all duration-300 hover:-translate-y-1`}>
-      <div className={`w-12 h-12 rounded-xl ${role.bgColor} flex items-center justify-center ${role.textColor} mb-5 group-hover:scale-110 transition-transform`}>
-        {role.icon}
-      </div>
-      <h3 className="text-xl font-bold text-slate-800 mb-2">{role.title}</h3>
-      <p className="text-sm text-slate-500 mb-5 leading-relaxed">{role.description}</p>
-      <ul className="space-y-2.5">
-        {role.features.map((feature) => (
-          <li key={feature} className="flex items-center gap-2.5">
-            <svg className={`w-4 h-4 ${role.textColor} shrink-0`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="text-sm text-slate-600">{feature}</span>
-          </li>
+    <div className="space-y-3">
+      <div className="grid grid-cols-3 gap-2.5">
+        {[
+          { label: "Students", value: "1,248", tone: "text-primary-600" },
+          { label: "Attendance", value: "94.2%", tone: "text-accent-600" },
+          { label: "Fees · Oct", value: "NPR 2.4M", tone: "text-violet-600" },
+        ].map((kpi) => (
+          <div key={kpi.label} className="rounded-xl border border-deep-100 bg-white p-3">
+            <p className="text-[10px] text-deep-400">{kpi.label}</p>
+            <p className={`mt-1 text-lg font-bold ${kpi.tone}`}>{kpi.value}</p>
+          </div>
         ))}
-      </ul>
+      </div>
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-3 text-xs font-semibold text-deep-800">School-wide performance</p>
+        <div className="flex items-end gap-1.5">
+          {[40, 62, 50, 74, 58, 86, 70].map((h, i) => (
+            <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-primary-500/80 to-accent-400" style={{ height: `${h}px` }} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
 
+function TeacherPreview() {
+  return (
+    <div className="space-y-3">
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-3 text-xs font-semibold text-deep-800">Mark attendance · Class 10A</p>
+        <div className="space-y-2">
+          {[
+            ["Aarav Gurung", "Present", "bg-emerald-100 text-emerald-600"],
+            ["Sneha Karki", "Present", "bg-emerald-100 text-emerald-600"],
+            ["Yash Thapa", "Absent", "bg-rose-100 text-rose-600"],
+          ].map(([name, status, tone]) => (
+            <div key={name} className="flex items-center justify-between rounded-lg bg-deep-50/60 px-3 py-2">
+              <span className="flex items-center gap-2 text-xs font-medium text-deep-800">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary-400" />
+                {name}
+              </span>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${tone}`}>{status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-2 text-xs font-semibold text-deep-800">Next class</p>
+        <p className="text-sm font-bold text-deep-900">Science · Grade 8</p>
+        <p className="text-[11px] text-deep-400">9:30 AM · Room 12</p>
+      </div>
+    </div>
+  );
+}
+
+function StudentPreview() {
+  return (
+    <div className="space-y-3">
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-2 text-xs font-semibold text-deep-800">Weekly timetable</p>
+        {[
+          ["Mon", "Science", "08:00"],
+          ["Tue", "English", "09:30"],
+          ["Wed", "Maths", "11:00"],
+        ].map(([day, subject, time]) => (
+          <div key={day} className="flex items-center justify-between border-b border-deep-50 py-2 last:border-0">
+            <span className="text-xs font-medium text-deep-500">{day}</span>
+            <span className="text-xs font-semibold text-deep-900">{subject}</span>
+            <span className="text-[10px] text-deep-400">{time}</span>
+          </div>
+        ))}
+      </div>
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-2 text-xs font-semibold text-deep-800">Latest results</p>
+        <div className="flex items-center gap-4">
+          <div className="flex-1">
+            {["Maths A", "Science B+", "English A-"].map((g) => (
+              <p key={g} className="text-xs text-deep-500">{g}</p>
+            ))}
+          </div>
+          <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 text-lg font-bold text-white">
+            87%
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ParentPreview() {
+  return (
+    <div className="space-y-3">
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-3 text-xs font-semibold text-deep-800">Aarav&apos;s week</p>
+        <div className="grid grid-cols-2 gap-2.5">
+          <div className="rounded-lg bg-emerald-50 p-2.5">
+            <p className="text-[10px] text-emerald-600">Attendance</p>
+            <p className="text-base font-bold text-emerald-700">96%</p>
+          </div>
+          <div className="rounded-lg bg-accent-50 p-2.5">
+            <p className="text-[10px] text-accent-600">Grade avg</p>
+            <p className="text-base font-bold text-accent-700">A-</p>
+          </div>
+        </div>
+      </div>
+      <div className="rounded-xl border border-deep-100 bg-white p-4">
+        <p className="mb-2 text-xs font-semibold text-deep-800">Recent notices</p>
+        {[
+          ["PTM on Friday · 10 AM", "2h ago"],
+          ["Fee due · Dec 5", "1d ago"],
+        ].map(([text, time]) => (
+          <div key={text} className="flex items-center justify-between py-2">
+            <span className="flex items-center gap-2 text-xs text-deep-600">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+              {text}
+            </span>
+            <span className="text-[10px] text-deep-400">{time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RolePreview({ role }: { role: Role }) {
+  return (
+    <div key={role.key} className="animate-fade-up">
+      {role.key === "admin" && <AdminPreview />}
+      {role.key === "teacher" && <TeacherPreview />}
+      {role.key === "student" && <StudentPreview />}
+      {role.key === "parent" && <ParentPreview />}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Section                                                             */
+/* ------------------------------------------------------------------ */
+
 export default function Roles() {
-  const headerRef = useInView(0.15);
+  const [active, setActive] = useState<RoleKey>("admin");
+  const role = roles.find((r) => r.key === active)!;
 
   return (
-    <section id="roles" className="section-padding bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={headerRef} className="text-center mb-16 opacity-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-50 border border-primary-100 mb-4">
-            <span className="text-xs font-medium text-primary-600">For Everyone</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            One platform.
-            <br />
-            <span className="gradient-text">Every role connected.</span>
-          </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Whether you run the school, teach in a classroom, study for exams, or
-            support from home — GyannPortal has you covered.
-          </p>
-        </div>
+    <section id="solutions" className="surface-gradient relative overflow-hidden py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-noise" />
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          {roles.map((role) => (
-            <RoleCard key={role.title} role={role} />
-          ))}
+      <div className="container-px relative max-w-7xl">
+        <SectionHeading
+          badge="Solutions"
+          title={
+            <>
+              One platform.
+              <br />
+              <span className="gradient-text">Every role connected.</span>
+            </>
+          }
+          subtitle="Whether you run the school, teach in the classroom or support from home — GyannPortal is built for you."
+        />
+
+        {/* Tabs */}
+        <Reveal delay={100}>
+          <div
+            className="mx-auto mb-12 flex max-w-2xl flex-wrap justify-center gap-1 rounded-2xl border border-deep-100 bg-white/70 p-1.5 shadow-sm backdrop-blur"
+            role="tablist"
+            aria-label="Choose your role"
+          >
+            {roles.map((r) => (
+              <button
+                key={r.key}
+                role="tab"
+                aria-selected={active === r.key}
+                onClick={() => setActive(r.key)}
+                className={`flex-1 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 ${
+                  active === r.key
+                    ? "bg-deep-900 text-white shadow-sm"
+                    : "text-deep-500 hover:bg-deep-100/70 hover:text-deep-800"
+                }`}
+              >
+                {r.tab}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+          {/* Benefits */}
+          <div key={`copy-${role.key}`} role="tabpanel" className="animate-fade-up">
+            <Reveal>
+              <div className="mb-4 flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-sm">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d={role.icon} />
+                  </svg>
+                </span>
+                <h3 className="text-2xl font-bold tracking-tight text-deep-900">{role.title}</h3>
+              </div>
+            </Reveal>
+            <Reveal delay={60}>
+              <p className="mb-6 text-lg leading-relaxed text-deep-500">{role.description}</p>
+            </Reveal>
+            <ul className="space-y-3.5">
+              {role.features.map((feature, i) => (
+                <Reveal key={feature} delay={100 + i * 60} y={14}>
+                  <li className="flex items-start gap-3">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                    <span className="text-base text-deep-700">{feature}</span>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+
+          {/* Preview panel */}
+          <Reveal delay={200} y={32}>
+            <div className="relative">
+              <div className="pointer-events-none absolute -inset-6 -z-10">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-primary-200/30 to-accent-200/30 blur-2xl" />
+              </div>
+              <div className="card-shadow-lg overflow-hidden rounded-2xl border border-deep-100 bg-white">
+                <div className="flex items-center justify-between border-b border-deep-100 bg-deep-50/60 px-4 py-2.5">
+                  <div className="flex gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                  </div>
+                  <span className="rounded-full bg-white px-3 py-0.5 text-[10px] font-medium text-deep-400 ring-1 ring-deep-100">
+                    {role.tab} workspace
+                  </span>
+                </div>
+                <div className="p-5">
+                  <RolePreview role={role} />
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

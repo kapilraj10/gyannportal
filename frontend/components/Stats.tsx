@@ -1,90 +1,88 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Reveal from "./shared/Reveal";
 
-function CountUp({ end, suffix = "" }: { end: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
+function CountUp({
+  end,
+  decimals = 0,
+  duration = 1800,
+}: {
+  end: number;
+  decimals?: number;
+  duration?: number;
+}) {
+  const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setValue(end);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true;
-          const duration = 2000;
-          const steps = 60;
-          const increment = end / steps;
-          let current = 0;
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= end) {
-              setCount(end);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(current));
-            }
-          }, duration / steps);
+          const start = performance.now();
+          const tick = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setValue(end * eased);
+            if (progress < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
+
     observer.observe(el);
     return () => observer.disconnect();
-  }, [end]);
+  }, [end, duration]);
 
-  return (
-    <span ref={ref}>
-      {count.toLocaleString()}{suffix}
-    </span>
-  );
+  const formatted =
+    decimals > 0
+      ? value.toFixed(decimals)
+      : Math.round(value).toLocaleString();
+
+  return <span ref={ref}>{formatted}</span>;
 }
 
 const stats = [
-  {
-    value: 500,
-    suffix: "+",
-    label: "Students Managed",
-    description: "Across multiple institutions",
-  },
-  {
-    value: 50,
-    suffix: "+",
-    label: "Schools",
-    description: "Trust GyannPortal",
-  },
-  {
-    value: 99,
-    suffix: ".9%",
-    label: "System Availability",
-    description: "Always online, always ready",
-  },
-  {
-    value: 24,
-    suffix: "/7",
-    label: "Access",
-    description: "Manage anytime, anywhere",
-  },
+  { value: 500, decimals: 0, suffix: "+", label: "Students managed", note: "Every day on the platform" },
+  { value: 50, decimals: 0, suffix: "+", label: "Schools", note: "Across institutions" },
+  { value: 99.9, decimals: 1, suffix: "%", label: "Uptime", note: "Always online, always ready" },
+  { value: 24, decimals: 0, suffix: "/7", label: "Access", note: "Manage anytime, anywhere" },
 ];
 
 export default function Stats() {
   return (
-    <section className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="text-center p-6 rounded-2xl hover:bg-slate-50 transition-colors"
-            >
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-2">
-                <CountUp end={stat.value} suffix={stat.suffix} />
+    <section className="relative overflow-hidden border-y border-deep-100/70 bg-white">
+      <div className="pointer-events-none absolute inset-0 bg-noise" />
+      <div className="container-px relative max-w-7xl">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, index) => (
+            <Reveal key={stat.label} delay={index * 90} className="relative">
+              <div
+                className={`flex h-full flex-col justify-center px-6 py-10 text-center sm:px-10 lg:py-14 lg:text-left ${
+                  index > 0 ? "lg:border-l lg:border-deep-100" : ""
+                }`}
+              >
+                <p className="text-4xl font-bold tracking-tight text-deep-900 sm:text-5xl lg:text-6xl">
+                  <CountUp end={stat.value} decimals={stat.decimals} />
+                  <span className="gradient-text">{stat.suffix}</span>
+                </p>
+                <p className="mt-2 text-sm font-semibold text-deep-800">{stat.label}</p>
+                <p className="mt-0.5 hidden text-xs text-deep-400 sm:block">{stat.note}</p>
               </div>
-              <p className="text-sm font-semibold text-slate-800 mb-1">{stat.label}</p>
-              <p className="text-xs text-slate-400">{stat.description}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

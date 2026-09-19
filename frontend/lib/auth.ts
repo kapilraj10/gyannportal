@@ -1,5 +1,10 @@
-import { api } from "./api";
-import { clearAccessToken, setAccessToken } from "./token";
+import { authApi } from "./api/auth";
+import { superAdminApi } from "./api/super-admin";
+import { schoolAdminApi } from "./api/school-admin";
+import { teachersApi } from "./api/teachers";
+import { studentsApi } from "./api/students";
+import { parentsApi } from "./api/parents";
+import { clearTokens, getRefreshToken, setTokens } from "./token";
 import { AuthResponse, User } from "@/types/auth";
 
 export interface LoginData {
@@ -30,17 +35,12 @@ export interface RegisterSchoolData {
   branchAddress?: string;
 }
 
-interface Envelope<T> {
-  success: boolean;
-  message: string;
-  data: T;
-}
-
 export async function login(data: LoginData): Promise<AuthResponse> {
-  const response = await api.post<Envelope<AuthResponse>>("/auth/login", data);
-  const payload = response.data.data;
+  const payload = await authApi.login(data);
 
-  setAccessToken(payload.accessToken);
+  if (payload.accessToken) {
+    setTokens(payload.accessToken, payload.refreshToken ?? undefined);
+  }
 
   return payload;
 }
@@ -48,25 +48,25 @@ export async function login(data: LoginData): Promise<AuthResponse> {
 export async function registerSchool(
   data: RegisterSchoolData,
 ): Promise<AuthResponse> {
-  const response = await api.post<Envelope<AuthResponse>>(
-    "/auth/register-school",
-    data,
-  );
-  const payload = response.data.data;
+  const payload = await authApi.registerSchool(data);
 
-  setAccessToken(payload.accessToken);
+  if (payload.accessToken) {
+    setTokens(payload.accessToken, payload.refreshToken ?? undefined);
+  }
 
   return payload;
 }
 
 export async function getMe(): Promise<User> {
-  const response = await api.get<Envelope<User>>("/auth/me");
-
-  return response.data.data;
+  return authApi.getMe();
 }
 
-export async function logout() {
-  clearAccessToken();
+export async function logout(): Promise<void> {
+  const refreshToken = getRefreshToken() ?? undefined;
+
+  await authApi.logout(refreshToken);
+
+  clearTokens();
 }
 
 // =====================================================
@@ -264,40 +264,28 @@ export interface ParentDashboardData {
 }
 
 export async function getSuperAdminDashboard(): Promise<SuperAdminDashboardData> {
-  const response = await api.get<Envelope<SuperAdminDashboardData>>(
-    "/super-admin/dashboard",
-  );
-  return response.data.data;
+  const data = await superAdminApi.getDashboard();
+  return data as unknown as SuperAdminDashboardData;
 }
 
 export async function getSchoolAdminDashboard(
   schoolId?: string,
 ): Promise<SchoolAdminDashboardData> {
-  const params = schoolId ? { schoolId } : {};
-  const response = await api.get<Envelope<SchoolAdminDashboardData>>(
-    "/school-admin/dashboard",
-    { params },
-  );
-  return response.data.data;
+  const data = await schoolAdminApi.getDashboard(schoolId);
+  return data as unknown as SchoolAdminDashboardData;
 }
 
 export async function getTeacherDashboard(): Promise<TeacherDashboardData> {
-  const response = await api.get<Envelope<TeacherDashboardData>>(
-    "/teachers/me/dashboard",
-  );
-  return response.data.data;
+  const data = await teachersApi.getDashboard();
+  return data as unknown as TeacherDashboardData;
 }
 
 export async function getStudentDashboard(): Promise<StudentDashboardData> {
-  const response = await api.get<Envelope<StudentDashboardData>>(
-    "/students/me/dashboard",
-  );
-  return response.data.data;
+  const data = await studentsApi.getDashboard();
+  return data as unknown as StudentDashboardData;
 }
 
 export async function getParentDashboard(): Promise<ParentDashboardData> {
-  const response = await api.get<Envelope<ParentDashboardData>>(
-    "/parents/me/dashboard",
-  );
-  return response.data.data;
+  const data = await parentsApi.getDashboard();
+  return data as unknown as ParentDashboardData;
 }

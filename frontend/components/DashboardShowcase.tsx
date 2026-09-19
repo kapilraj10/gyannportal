@@ -1,18 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import SectionHeading from "./shared/SectionHeading";
 
-function useInView(threshold = 0.1) {
+function useInView(threshold = 0.25) {
   const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add("animate-fade-up");
-          observer.unobserve(el);
+          setInView(true);
+          observer.disconnect();
         }
       },
       { threshold }
@@ -20,236 +23,309 @@ function useInView(threshold = 0.1) {
     observer.observe(el);
     return () => observer.disconnect();
   }, [threshold]);
-  return ref;
+
+  return { ref, inView };
 }
 
+const sidebarNav = [
+  "Dashboard",
+  "Students",
+  "Teachers",
+  "Attendance",
+  "Exams",
+  "Timetable",
+  "Reports",
+];
+
+const weekData = [
+  { present: 94, absent: 6 },
+  { present: 91, absent: 9 },
+  { present: 96, absent: 4 },
+  { present: 89, absent: 11 },
+  { present: 95, absent: 5 },
+  { present: 97, absent: 3 },
+  { present: 93, absent: 7 },
+];
+
+const announcements = [
+  { text: "Annual day celebration on October 20th", meta: "Event · 2h ago" },
+  { text: "Parent-teacher meeting scheduled for Grade 9", meta: "Meeting · 5h ago" },
+  { text: "New library hours: 8 AM – 4 PM", meta: "Notice · 1d ago" },
+];
+
+const calEvents = new Set([20, 25]);
+
 export default function DashboardShowcase() {
-  const ref = useInView(0.1);
+  const { ref, inView } = useInView(0.2);
 
   return (
-    <section className="section-padding bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={ref} className="text-center mb-16 opacity-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-50 border border-primary-100 mb-4">
-            <span className="text-xs font-medium text-primary-600">Dashboard</span>
+    <section id="showcase" className="relative overflow-hidden bg-white py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(60%_50%_at_50%_40%,black,transparent)]" />
+      </div>
+
+      <div className="container-px relative max-w-7xl">
+        <SectionHeading
+          badge="Product tour"
+          title={
+            <>
+              See your school
+              <br />
+              <span className="gradient-text">at a glance.</span>
+            </>
+          }
+          subtitle="A clean, powerful dashboard gives administrators a complete, real-time view of the entire school."
+        />
+
+        {/* Floating callouts (desktop only) */}
+        <div className="pointer-events-none absolute left-2 top-[44%] z-20 hidden animate-float-slower items-center gap-2.5 rounded-xl border border-deep-100 bg-white p-3 shadow-glow xl:flex">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </span>
+          <div>
+            <p className="text-xs font-semibold text-deep-900">Attendance synced</p>
+            <p className="text-[10px] text-deep-400">1,150 present today</p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            See your school
-            <br />
-            <span className="gradient-text">at a glance.</span>
-          </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            A clean, powerful dashboard gives administrators a complete overview of
-            school operations in real time.
-          </p>
         </div>
 
-        {/* Full Dashboard Mockup */}
-        <div className="relative max-w-5xl mx-auto">
-          <div className="absolute -inset-4 bg-gradient-to-r from-primary-200/30 to-accent-200/30 rounded-3xl blur-2xl" />
-          <div className="relative bg-white rounded-2xl card-shadow-lg overflow-hidden border border-slate-100">
-            {/* Browser bar */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-100">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-amber-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
+        <div className="pointer-events-none absolute right-2 top-[58%] z-20 hidden animate-float-delayed items-center gap-2.5 rounded-xl border border-deep-100 bg-white p-3 shadow-glow xl:flex">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-50 text-accent-600">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659 1.171-1.671.879.659-1.17 1.671.879.659-1.171 1.671M12 6c1.162 0 2.317.14 3.428.403" />
+            </svg>
+          </span>
+          <div>
+            <p className="text-xs font-semibold text-deep-900">Fee reminder sent</p>
+            <p className="text-[10px] text-deep-400">23 parents notified</p>
+          </div>
+        </div>
+
+        {/* Phone preview */}
+        <div className="absolute -right-10 top-[30%] z-20 hidden w-40 animate-float-slow xl:block">
+          <div className="rounded-[2.2rem] border border-deep-100 bg-deep-900 p-2 shadow-glow">
+            <div className="overflow-hidden rounded-[1.8rem] bg-white">
+              <div className="flex items-center justify-between px-4 pb-1 pt-4">
+                <span className="text-[8px] font-semibold text-deep-800">9:41</span>
+                <span className="h-1.5 w-6 rounded-full bg-deep-200" />
               </div>
-              <div className="flex-1 mx-4">
-                <div className="bg-white rounded-lg border border-slate-200 px-3 py-1.5 flex items-center gap-2 max-w-md">
-                  <svg className="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582" />
-                  </svg>
-                  <span className="text-xs text-slate-500">app.gyannportal.com/dashboard</span>
+              <div className="px-3.5">
+                <p className="text-[9px] font-medium text-deep-400">Welcome back, Aarav</p>
+                <p className="text-[11px] font-bold text-deep-900">Attendance 94%</p>
+                <div className="mt-2 space-y-1.5 pb-4">
+                  {[
+                    ["Maths", "8:00 AM"],
+                    ["Science", "9:30 AM"],
+                  ].map(([s, t]) => (
+                    <div key={s} className="flex items-center justify-between rounded-lg bg-deep-50/70 px-2 py-1.5">
+                      <span className="text-[9px] font-medium text-deep-700">{s}</span>
+                      <span className="text-[8px] text-deep-400">{t}</span>
+                    </div>
+                  ))}
                 </div>
+              </div>
+              <div className="flex items-center justify-around border-t border-deep-100 px-3 py-2">
+                {["Home", "Exams", "More"].map((l, i) => (
+                  <span
+                    key={l}
+                    className={`h-2 w-2 rounded-full ${i === 0 ? "bg-primary-500" : "bg-deep-200"}`}
+                    aria-hidden
+                  />
+                ))}
+                <span className="text-[7px] text-deep-400">{""}</span>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Dashboard Content */}
-            <div className="flex min-h-[500px]">
-              {/* Sidebar */}
-              <div className="hidden md:flex flex-col w-56 bg-slate-50 border-r border-slate-100 p-4">
-                <div className="flex items-center gap-2 mb-8">
-                  <Image
-                    src="/logo1.png"
-                    alt="GyannPortal logo"
-                    width={1536}
-                    height={1024}
-                    className="h-7 w-auto object-contain"
-                  />
+        {/* Dashboard frame */}
+        <div ref={ref} className="relative mx-auto max-w-5xl">
+          <div
+            className="transition-transform duration-[900ms] ease-out md:[transform-style:preserve-3d]"
+            style={{
+              transform: inView
+                ? "perspective(2000px) rotateX(0deg) translateY(0)"
+                : "perspective(2000px) rotateX(5deg) translateY(28px)",
+            }}
+          >
+            <div className="card-shadow-lg overflow-hidden rounded-2xl border border-deep-100 bg-white">
+              {/* Browser bar */}
+              <div className="flex items-center gap-3 border-b border-deep-100 bg-deep-50/70 px-4 py-3">
+                <div className="flex gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
                 </div>
-                <nav className="space-y-1 flex-1">
-                  {[
-                    { label: "Dashboard", active: true, icon: "M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25a2.25 2.25 0 0 1-2.25-2.25v-2.25Z" },
-                    { label: "Students", active: false, icon: "M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" },
-                    { label: "Teachers", active: false, icon: "M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25" },
-                    { label: "Attendance", active: false, icon: "M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" },
-                    { label: "Fees", active: false, icon: "M12 6v12m-3-2.818.879.659 1.171-1.671.879.659-1.17 1.671.879.659-1.171 1.671M12 6c1.162 0 2.317.14 3.428.403" },
-                    { label: "Exams", active: false, icon: "M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25" },
-                    { label: "Timetable", active: false, icon: "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25" },
-                    { label: "Library", active: false, icon: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292" },
-                    { label: "Reports", active: false, icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75Z" },
-                  ].map((item) => (
-                    <a
-                      key={item.label}
-                      href="#"
-                      className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
-                        item.active
-                          ? "bg-primary-50 text-primary-600 font-medium"
-                          : "text-slate-500 hover:text-slate-700 hover:bg-slate-100"
-                      }`}
-                    >
-                      <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
-                      </svg>
-                      {item.label}
-                    </a>
-                  ))}
-                </nav>
+                <div className="mx-auto flex w-full max-w-sm items-center justify-center gap-2 rounded-lg bg-white px-3 py-1.5 ring-1 ring-deep-100">
+                  <svg className="h-3 w-3 text-deep-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0V8m0 0h-4m4 0h4" />
+                  </svg>
+                  <span className="text-[11px] text-deep-500">app.gyannportal.com/dashboard</span>
+                </div>
               </div>
 
-              {/* Main Content */}
-              <div className="flex-1 p-4 sm:p-6 overflow-hidden">
-                {/* Top bar */}
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-800">Dashboard</h3>
-                    <p className="text-xs text-slate-400">Welcome back, Ramesh Admin</p>
+              <div className="flex min-h-[520px]">
+                {/* Sidebar */}
+                <aside className="hidden w-52 shrink-0 flex-col border-r border-deep-100 bg-white p-4 md:flex">
+                  <div className="mb-7 flex items-center gap-2 px-2">
+                    <Image
+                      src="/logo1.png"
+                      alt="GyannPortal logo"
+                      width={64}
+                      height={32}
+                      className="h-6 w-auto object-contain"
+                    />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-slate-50 rounded-lg border border-slate-100">
-                      <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                      </svg>
-                      <span className="text-xs text-slate-400">Search...</span>
+                  <nav className="flex-1 space-y-1" aria-hidden>
+                    {sidebarNav.map((item, i) => (
+                      <div
+                        key={item}
+                        className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] font-medium ${
+                          i === 0
+                            ? "bg-primary-50 text-primary-600"
+                            : "text-deep-400"
+                        }`}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${i === 0 ? "bg-primary-500" : "bg-deep-200"}`} />
+                        {item}
+                      </div>
+                    ))}
+                  </nav>
+                  <div className="rounded-xl bg-deep-50/70 p-3">
+                    <div className="h-1.5 w-3/4 rounded-full bg-deep-200" />
+                    <div className="mt-1.5 h-1.5 w-1/2 rounded-full bg-deep-200" />
+                  </div>
+                </aside>
+
+                {/* Main */}
+                <div className="flex-1 p-4 sm:p-6">
+                  <div className="mb-5 flex items-center justify-between">
+                    <div>
+                      <p className="text-base font-bold text-deep-900">Dashboard</p>
+                      <p className="text-[11px] text-deep-400">Welcome back, Ramesh Admin</p>
                     </div>
                     <div className="relative">
-                      <div className="w-9 h-9 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-sm font-semibold">RA</div>
-                      <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-[11px] font-semibold text-white">
+                        RA
+                      </span>
+                      <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-rose-500" />
                     </div>
                   </div>
-                </div>
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-                  {[
-                    { label: "Total Students", value: "1,248", icon: "M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952", color: "text-blue-600 bg-blue-50" },
-                    { label: "Present Today", value: "1,175", icon: "M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z", color: "text-emerald-600 bg-emerald-50" },
-                    { label: "Fee Collected", value: "NPR 24.5L", icon: "M12 6v12m-3-2.818", color: "text-amber-600 bg-amber-50" },
-                    { label: "Pending Fees", value: "NPR 3.2L", icon: "M12 6v12m-3-2.818", color: "text-rose-600 bg-rose-50" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="bg-white rounded-xl border border-slate-100 p-3.5">
-                      <div className={`w-8 h-8 rounded-lg ${stat.color} flex items-center justify-center mb-2`}>
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d={stat.icon} />
-                        </svg>
-                      </div>
-                      <p className="text-xs text-slate-400">{stat.label}</p>
-                      <p className="text-lg font-bold text-slate-800">{stat.value}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="grid lg:grid-cols-3 gap-4">
-                  {/* Attendance Chart */}
-                  <div className="lg:col-span-2 bg-white rounded-xl border border-slate-100 p-4">
-                    <div className="flex items-center justify-between mb-4">
-                      <p className="text-sm font-semibold text-slate-700">Weekly Attendance</p>
-                      <div className="flex items-center gap-3 text-xs text-slate-400">
-                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-primary-500" />Present</span>
-                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-200" />Absent</span>
-                      </div>
-                    </div>
-                    <div className="flex items-end gap-3 h-32">
-                      {[
-                        { present: 94, absent: 6 },
-                        { present: 91, absent: 9 },
-                        { present: 96, absent: 4 },
-                        { present: 89, absent: 11 },
-                        { present: 95, absent: 5 },
-                        { present: 97, absent: 3 },
-                        { present: 93, absent: 7 },
-                      ].map((day, i) => (
-                        <div key={i} className="flex-1 flex flex-col gap-0.5">
-                          <div
-                            className="w-full rounded-sm"
-                            style={{ height: `${day.present}%`, background: "linear-gradient(180deg, #2563eb, #14b8a6)" }}
-                          />
-                          <div className="w-full rounded-sm bg-slate-100" style={{ height: `${day.absent}%` }} />
+                  {/* Stat row */}
+                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                    {[
+                      { label: "Total students", value: "1,248", tone: "text-primary-600", chip: "bg-primary-50" },
+                      { label: "Present today", value: "1,175", tone: "text-emerald-600", chip: "bg-emerald-50" },
+                      { label: "Fee collected", value: "NPR 24.5L", tone: "text-amber-600", chip: "bg-amber-50" },
+                      { label: "Pending fees", value: "NPR 3.2L", tone: "text-rose-600", chip: "bg-rose-50" },
+                    ].map((stat) => (
+                      <div key={stat.label} className="rounded-xl border border-deep-100 bg-white p-3">
+                        <div className={`mb-2 flex h-7 w-7 items-center justify-center rounded-lg ${stat.chip}`}>
+                          <span className={`h-2 w-2 rounded-full ${stat.tone.replace("text", "bg")}`} />
                         </div>
-                      ))}
-                    </div>
-                    <div className="flex justify-between mt-2">
-                      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-                        <span key={d} className="text-[10px] text-slate-400 flex-1 text-center">{d}</span>
-                      ))}
-                    </div>
+                        <p className="text-[10px] text-deep-400">{stat.label}</p>
+                        <p className="text-base font-bold tracking-tight text-deep-900">{stat.value}</p>
+                      </div>
+                    ))}
                   </div>
 
-                  {/* Upcoming Exams */}
-                  <div className="bg-white rounded-xl border border-slate-100 p-4">
-                    <p className="text-sm font-semibold text-slate-700 mb-3">Upcoming Exams</p>
-                    <div className="space-y-3">
-                      {[
-                        { name: "Mid-term", grade: "Grade 10", date: "Sep 25", color: "bg-blue-500" },
-                        { name: "Unit Test", grade: "Grade 8", date: "Oct 2", color: "bg-emerald-500" },
-                        { name: "Pre-board", grade: "Grade 12", date: "Oct 15", color: "bg-violet-500" },
-                      ].map((exam) => (
-                        <div key={exam.name} className="flex items-center gap-3">
-                          <div className={`w-1 h-8 rounded-full ${exam.color} shrink-0`} />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs font-medium text-slate-700 truncate">{exam.name}</p>
-                            <p className="text-[10px] text-slate-400">{exam.grade} &middot; {exam.date}</p>
+                  <div className="mt-3 grid gap-3 lg:grid-cols-3">
+                    {/* Weekly attendance */}
+                    <div className="rounded-xl border border-deep-100 bg-white p-4 lg:col-span-2">
+                      <div className="mb-4 flex items-center justify-between">
+                        <p className="text-xs font-semibold text-deep-800">Weekly attendance</p>
+                        <div className="flex items-center gap-3 text-[10px] text-deep-400">
+                          <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-primary-500" />Present</span>
+                          <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-deep-200" />Absent</span>
+                        </div>
+                      </div>
+                      <div className="flex items-end gap-2 sm:gap-3">
+                        {weekData.map((day, i) => (
+                          <div key={i} className="flex flex-1 flex-col gap-1" style={{ height: 108 }}>
+                            <div
+                              className="w-full rounded-t-sm bg-gradient-to-t from-primary-500 to-accent-400 transition-all duration-700"
+                              style={{ height: inView ? `${day.present}%` : "0%", transitionDelay: `${i * 50}ms` }}
+                            />
+                            <div
+                              className="w-full rounded-b-sm bg-deep-100 transition-all duration-700"
+                              style={{ height: inView ? `${day.absent}%` : "0%", transitionDelay: `${i * 50}ms` }}
+                            />
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                      <div className="mt-2 flex justify-between">
+                        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                          <span key={d} className="flex-1 text-center text-[10px] text-deep-400">{d}</span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Announcements */}
-                  <div className="lg:col-span-2 bg-white rounded-xl border border-slate-100 p-4">
-                    <p className="text-sm font-semibold text-slate-700 mb-3">Recent Announcements</p>
-                    <div className="space-y-2.5">
-                      {[
-                        { text: "Annual day celebration on October 20th", time: "2h ago", type: "Event" },
-                        { text: "Parent-teacher meeting scheduled for Grade 9", time: "5h ago", type: "Meeting" },
-                        { text: "New library hours: 8 AM - 4 PM", time: "1d ago", type: "Notice" },
-                        { text: "Sports day practice starts next week", time: "2d ago", type: "Activity" },
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors">
-                          <span className="px-2 py-0.5 text-[10px] font-medium bg-primary-50 text-primary-600 rounded-md shrink-0">{item.type}</span>
-                          <p className="text-xs text-slate-600 flex-1 leading-relaxed">{item.text}</p>
-                          <span className="text-[10px] text-slate-400 shrink-0">{item.time}</span>
-                        </div>
-                      ))}
+                    {/* Upcoming exams */}
+                    <div className="rounded-xl border border-deep-100 bg-white p-4">
+                      <p className="mb-3 text-xs font-semibold text-deep-800">Upcoming exams</p>
+                      <div className="space-y-3">
+                        {[
+                          { name: "Mid-term", grade: "Grade 10 · Sep 25", color: "bg-primary-500" },
+                          { name: "Unit test", grade: "Grade 8 · Oct 2", color: "bg-accent-500" },
+                          { name: "Pre-board", grade: "Grade 12 · Oct 15", color: "bg-violet-500" },
+                        ].map((exam) => (
+                          <div key={exam.name} className="flex items-center gap-2.5">
+                            <span className={`h-8 w-1 rounded-full ${exam.color}`} />
+                            <div>
+                              <p className="text-xs font-medium text-deep-800">{exam.name}</p>
+                              <p className="text-[10px] text-deep-400">{exam.grade}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Calendar */}
-                  <div className="bg-white rounded-xl border border-slate-100 p-4">
-                    <p className="text-sm font-semibold text-slate-700 mb-3">September 2026</p>
-                    <div className="grid grid-cols-7 gap-1">
-                      {["S", "M", "T", "W", "T", "F", "S"].map((d, idx) => (
-                        <div key={`${d}-${idx}`} className="text-center text-[10px] font-medium text-slate-400 py-1">{d}</div>
-                      ))}
-                      {[0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map((day, i) => {
-                        const isToday = day === 17;
-                        const hasEvent = [20, 25].includes(day);
-                        return (
-                          <div
-                            key={i}
-                            className={`text-center text-[10px] py-1.5 rounded-lg relative ${
-                              day === 0 ? "invisible" :
-                              isToday ? "bg-primary-500 text-white font-semibold" :
-                              hasEvent ? "bg-primary-50 text-primary-600 font-medium" :
-                              "text-slate-600 hover:bg-slate-50"
+                    {/* Announcements */}
+                    <div className="rounded-xl border border-deep-100 bg-white p-4 lg:col-span-2">
+                      <p className="mb-2 text-xs font-semibold text-deep-800">Recent announcements</p>
+                      <div className="space-y-1">
+                        {announcements.map((a) => (
+                          <div key={a.text} className="flex items-start gap-2.5 rounded-lg px-1.5 py-1.5">
+                            <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-400" />
+                            <div>
+                              <p className="text-xs text-deep-600">{a.text}</p>
+                              <p className="text-[10px] text-deep-400">{a.meta}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Calendar */}
+                    <div className="rounded-xl border border-deep-100 bg-white p-4">
+                      <p className="mb-2 text-xs font-semibold text-deep-800">September 2026</p>
+                      <div className="grid grid-cols-7 gap-0.5">
+                        {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
+                          <span key={`h-${i}`} className="py-0.5 text-center text-[9px] font-medium text-deep-400">{d}</span>
+                        ))}
+                        {[
+                          0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                          15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                        ].map((day, i) => (
+                          <span
+                            key={`d-${i}`}
+                            className={`relative rounded-md py-1 text-center text-[9px] ${
+                              day === 0
+                                ? "invisible"
+                                : day === 17
+                                ? "font-semibold text-white"
+                                : calEvents.has(day)
+                                ? "bg-primary-50 font-medium text-primary-600"
+                                : "text-deep-600"
                             }`}
                           >
-                            {day === 0 ? "" : day}
-                            {hasEvent && !isToday && <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-500" />}
-                          </div>
-                        );
-                      })}
+                            {day === 17 && <span className="absolute inset-0 rounded-md bg-gradient-to-br from-primary-500 to-accent-500" />}
+                            <span className="relative">{day === 0 ? "" : day}</span>
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -156,7 +156,9 @@ export class AuthService {
           name: result.user.name,
           email: result.user.email,
           role: result.role.name,
+          roleId: result.role.id,
           schoolId: result.school.id,
+          permissions: [],
           school: {
             id: result.school.id,
             name: result.school.name,
@@ -213,6 +215,8 @@ export class AuthService {
       roleName: user.role.name,
     });
 
+    const permissions = await this.getPermissionsForRole(user.role.id);
+
     await this.auditLogs.log({
       userId: user.id,
       schoolId: user.schoolId,
@@ -233,7 +237,10 @@ export class AuthService {
           email: user.email,
           phone: user.phone,
           role: user.role.name,
+          roleId: user.role.id,
+          status: user.status,
           schoolId: user.schoolId,
+          permissions,
           school: {
             id: user.school.id,
             name: user.school.name,
@@ -354,6 +361,8 @@ export class AuthService {
       throw new NotFoundException('User not found');
     }
 
+    const permissions = await this.getPermissionsForRole(user.roleId);
+
     return {
       message: 'Profile fetched successfully',
       data: {
@@ -372,6 +381,7 @@ export class AuthService {
         roleId: user.roleId,
         status: user.status,
         schoolId: user.schoolId,
+        permissions,
         school: {
           id: user.school.id,
           name: user.school.name,
@@ -445,6 +455,23 @@ export class AuthService {
   // =====================================================
   // TOKEN HELPERS
   // =====================================================
+
+  /**
+   * Resolve the permission names granted to a role. Used to decorate auth
+   * responses so the frontend can apply `can()` checks without extra calls.
+   */
+  private async getPermissionsForRole(roleId: string): Promise<string[]> {
+    const role = await this.prisma.role.findUnique({
+      where: { id: roleId },
+      select: {
+        rolePermissions: {
+          select: { permission: { select: { name: true } } },
+        },
+      },
+    });
+
+    return (role?.rolePermissions ?? []).map((rp) => rp.permission.name);
+  }
 
   private async issueTokens(
     user: TokenUser,

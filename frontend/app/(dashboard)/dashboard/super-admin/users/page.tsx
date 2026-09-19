@@ -1,273 +1,249 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  CheckCircle,
-  Edit,
-  Plus,
-  Search,
-  Trash2,
-  User,
-  XCircle,
-} from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { Ban, CheckCircle, XCircle } from "lucide-react";
+
+import { superAdminApi } from "@/lib/api";
+import { formatDate, initials } from "@/lib/format";
+import { getErrorMessage } from "@/lib/errors";
+
+import type { User } from "@/types/domain";
+import type { PaginationMeta } from "@/types/api";
 
 import DashboardShell from "@/components/DashboardShell";
-import { api } from "@/lib/api";
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  phone?: string;
-  avatar?: string;
-  status: string;
-  role: { id: string; name: string };
-  school: { id: string; name: string; code: string };
-  branch?: { id: string; name: string } | null;
-  createdAt: string;
-}
-
-interface Envelope<T> {
-  success: boolean;
-  message: string;
-  data: T;
-  meta?: { page: number; limit: number; total: number; totalPages: number };
-}
+import PageHeader from "@/components/common/PageHeader";
+import DataTable, { type ColumnDef } from "@/components/common/DataTable";
+import ErrorState from "@/components/common/ErrorState";
+import EmptyState from "@/components/common/EmptyState";
+import Badge from "@/components/common/Badge";
+import { Button, Input, Select } from "@/components/ui";
 
 export default function SuperAdminUsersPage() {
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [meta, setMeta] = useState<PaginationMeta | null>(null);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<unknown>(null);
+  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [pending, setPending] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchUsers();
-  }, [page, search, roleFilter, statusFilter]);
-
-  async function fetchUsers() {
+  const load = useCallback(async () => {
     setLoading(true);
+    setError(null);
+
     try {
       const params: Record<string, string> = { page: String(page), limit: "20" };
       if (search) params.search = search;
       if (roleFilter) params.role = roleFilter;
       if (statusFilter) params.status = statusFilter;
 
-      const response = await api.get<Envelope<User[]>>("/super-admin/users", { params });
-      setUsers(response.data.data);
-      setTotalPages(response.data.meta?.totalPages ?? 1);
-      setTotal(response.data.meta?.total ?? 0);
-    } catch (error) {
-      console.error("Failed to fetch users:", error);
+      const result = await superAdminApi.listUsers(params);
+      setUsers(result.data);
+      setMeta(result.meta);
+    } catch (err) {
+      setError(err);
     } finally {
       setLoading(false);
     }
+  }, [page, search, roleFilter, statusFilter]);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
+
+  async function handleStatusChange(user: User, status: string) {
+    setPending(user.id);
+    setError(null);
+    try {
+      await superAdminApi.updateUserStatus(user.id, status as User["status"]);
+      await load();
+    } catch (err) {
+      setError(err);
+    } finally {
+      setPending(null);
+    }
   }
 
-  const statusColor = (status: string) => {
-    switch (status) {
-      case "ACTIVE":
-        return "bg-green-100 text-green-700";
-      case "SUSPENDED":
-        return "bg-red-100 text-red-700";
-      case "PENDING":
-        return "bg-amber-100 text-amber-700";
-      case "INACTIVE":
-        return "bg-slate-100 text-slate-700";
-      default:
-        return "bg-slate-100 text-slate-700";
-    }
-  };
-
-  const roleColor = (role: string) => {
-    switch (role) {
-      case "SUPER_ADMIN":
-        return "bg-purple-100 text-purple-700";
-      case "SCHOOL_ADMIN":
-        return "bg-blue-100 text-blue-700";
-      case "TEACHER":
-        return "bg-teal-100 text-teal-700";
-      case "STUDENT":
-        return "bg-green-100 text-green-700";
-      case "PARENT":
-        return "bg-amber-100 text-amber-700";
-      default:
-        return "bg-slate-100 text-slate-700";
-    }
-  };
-
-  if (loading && users.length === 0) {
-    return (
-      <DashboardShell role="SUPER_ADMIN">
-        <div className="flex min-h-[400px] items-center justify-center text-slate-500">
-          Loading users...
+  const columns: ColumnDef<User>[] = [
+    {
+      key: "name",
+      header: "User",
+      render: (row) => (
+        <div className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+            {initials(row.name)}
+          </span>
+          <div>
+            <p className="font-medium text-slate-900">{row.name}</p>
+            <p className="text-xs text-slate-400">{row.email}</p>
+          </div>
         </div>
-      </DashboardShell>
-    );
-  }
+      ),
+    },
+    {
+      key: "role",
+      header: "Role",
+      render: (row) => (
+        <span className="text-slate-600">
+          {row.roleName ??
+            (typeof row.role === "string"
+              ? row.role
+              : (row.role as { name?: string } | null)?.name) ??
+            "—"}
+        </span>
+      ),
+    },
+    {
+      key: "school",
+      header: "School",
+      render: (row) => (
+        <div className="text-slate-600">
+          <p>{row.school?.name ?? "—"}</p>
+          {row.school && (
+            <p className="text-xs text-slate-400">
+              {row.school.code}
+              {row.branch ? ` · ${row.branch.name}` : ""}
+            </p>
+          )}
+        </div>
+      ),
+    },
+    {
+      key: "status",
+      header: "Status",
+      render: (row) => <Badge status={row.status}>{row.status}</Badge>,
+    },
+    {
+      key: "createdAt",
+      header: "Joined",
+      render: (row) => (
+        <span className="text-slate-500">{formatDate(row.createdAt)}</span>
+      ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      align: "right",
+      render: (row) => {
+        if (row.status === "SUSPENDED") {
+          return (
+            <Button
+              variant="secondary"
+              size="sm"
+              loading={pending === row.id}
+              onClick={() => void handleStatusChange(row, "ACTIVE")}
+            >
+              <CheckCircle className="h-4 w-4 text-emerald-500" />
+              Activate
+            </Button>
+          );
+        }
+        if (row.status === "ACTIVE") {
+          return (
+            <div className="flex justify-end gap-2">
+              <Button
+                variant="secondary"
+                size="sm"
+                loading={pending === row.id}
+                onClick={() => void handleStatusChange(row, "SUSPENDED")}
+              >
+                <Ban className="h-4 w-4 text-amber-500" />
+                Suspend
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                loading={pending === row.id}
+                onClick={() => void handleStatusChange(row, "INACTIVE")}
+              >
+                <XCircle className="h-4 w-4 text-slate-400" />
+                Deactivate
+              </Button>
+            </div>
+          );
+        }
+        return (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => void handleStatusChange(row, "ACTIVE")}
+          >
+            <CheckCircle className="h-4 w-4 text-emerald-500" />
+            Reactivate
+          </Button>
+        );
+      },
+    },
+  ];
 
   return (
     <DashboardShell role="SUPER_ADMIN">
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-slate-500">Manage all users across the platform</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">Users</h2>
-          </div>
-          <button className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700">
-            <Plus size={18} />
-            Add User
-          </button>
-        </div>
-      </div>
-
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-200 px-6 py-4">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search users..."
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1);
-                }}
-                className="w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-            </div>
-            <select
-              value={roleFilter}
-              onChange={(e) => {
-                setRoleFilter(e.target.value);
-                setPage(1);
+      <PageHeader
+        title="Users"
+        description="All accounts across the platform."
+        actions={
+          <div className="flex flex-wrap items-center gap-2">
+            <Input
+              placeholder="Search by name or email"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") setSearch(searchInput.trim());
               }}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-56"
+            />
+            <Select
+              value={roleFilter}
+              onChange={(e) => setRoleFilter(e.target.value)}
+              className="w-40"
             >
-              <option value="">All Roles</option>
+              <option value="">All roles</option>
               <option value="SUPER_ADMIN">Super Admin</option>
               <option value="SCHOOL_ADMIN">School Admin</option>
               <option value="TEACHER">Teacher</option>
-              <option value="STUDENT">Student</option>
               <option value="PARENT">Parent</option>
-            </select>
-            <select
+              <option value="STUDENT">Student</option>
+            </Select>
+            <Select
               value={statusFilter}
-              onChange={(e) => {
-                setStatusFilter(e.target.value);
-                setPage(1);
-              }}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="w-40"
             >
-              <option value="">All Status</option>
+              <option value="">All statuses</option>
               <option value="ACTIVE">Active</option>
               <option value="INACTIVE">Inactive</option>
               <option value="SUSPENDED">Suspended</option>
-              <option value="PENDING">Pending</option>
-            </select>
+            </Select>
           </div>
-        </div>
+        }
+      />
 
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-slate-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">User</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Role</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">School</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Branch</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Joined</th>
-                <th className="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200">
-              {users.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-slate-500">
-                    No users found
-                  </td>
-                </tr>
-              ) : (
-                users.map((user) => (
-                  <tr key={user.id} className="hover:bg-slate-50">
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-blue-600 text-sm font-medium">
-                          {user.name.charAt(0).toUpperCase()}
-                        </div>
-                        <div>
-                          <div className="font-medium text-slate-900">{user.name}</div>
-                          <div className="text-sm text-slate-500">{user.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${roleColor(user.role.name)}`}>
-                        {user.role.name}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-slate-600">
-                      {user.school.name} ({user.school.code})
-                    </td>
-                    <td className="px-6 py-4 text-sm text-slate-600">
-                      {user.branch?.name ?? "—"}
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusColor(user.status)}`}>
-                        {user.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-slate-500">
-                      {new Date(user.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <button className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700" title="Edit">
-                          <Edit size={16} />
-                        </button>
-                        <button className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-red-600" title="Delete">
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+      {error ? (
+        <ErrorState error={getErrorMessage(error)} onRetry={() => void load()} />
+      ) : null}
 
-        {totalPages > 1 && (
-          <div className="border-t border-slate-200 px-6 py-4">
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-500">
-                Showing {((page - 1) * 20) + 1} to {Math.min(page * 20, total)} of {total} users
-              </p>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setPage(page - 1)}
-                  disabled={page === 1}
-                  className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Previous
-                </button>
-                <button
-                  onClick={() => setPage(page + 1)}
-                  disabled={page === totalPages}
-                  className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      {!error && (
+        <>
+          {users.length === 0 && !loading ? (
+            <EmptyState
+              title="No users found"
+              description="Try adjusting your filters."
+            />
+          ) : (
+            <DataTable
+              columns={columns}
+              rows={users}
+              rowKey={(row) => row.id}
+              meta={meta}
+              onPageChange={setPage}
+              loading={loading}
+            />
+          )}
+        </>
+      )}
     </DashboardShell>
   );
 }

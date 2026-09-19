@@ -1,163 +1,175 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
-  BookOpen,
+  ArrowRight,
   CalendarDays,
   ClipboardList,
+  FileBarChart,
   GraduationCap,
   Users,
 } from "lucide-react";
 
+import { teachersApi } from "@/lib/api";
+import { useAuth } from "@/providers/auth-provider";
+
 import DashboardShell from "@/components/DashboardShell";
 import StatCard from "@/components/dashboard/StatCard";
-import { useAuth } from "@/providers/auth-provider";
-import { getTeacherDashboard, type TeacherDashboardData } from "@/lib/auth";
+import WelcomeHeader from "@/components/dashboard/WelcomeHeader";
+import LoadingState from "@/components/common/LoadingState";
+import ErrorState from "@/components/common/ErrorState";
+
+interface TeacherDashboard {
+  teacher_id?: string;
+  classes?: Array<{ id?: string; name?: string }>;
+  courses?: Array<{ id?: string; name?: string }>;
+  totalStudents?: number;
+  todayAttendance?: number;
+  pendingAssignments?: number;
+  upcomingExams?: number;
+}
 
 export default function TeacherDashboardPage() {
   const { user } = useAuth();
-  const [data, setData] = useState<TeacherDashboardData | null>(null);
+  const [data, setData] = useState<TeacherDashboard | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
-    async function fetchDashboard() {
-      try {
-        const dashboard = await getTeacherDashboard();
-        setData(dashboard);
-      } catch (error) {
-        console.error("Failed to fetch teacher dashboard:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchDashboard();
+    void teachersApi
+      .getDashboard()
+      .then((result) => setData(result as TeacherDashboard))
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <DashboardShell role="TEACHER">
-        <div className="flex min-h-[400px] items-center justify-center text-slate-500">
-          Loading dashboard...
-        </div>
-      </DashboardShell>
-    );
-  }
-
-  const myClasses = data?.counts.myClasses ?? 0;
-  const myStudents = data?.counts.myStudents ?? 0;
-  const myCourses = data?.counts.myCourses ?? 0;
-  const pendingAssignments = data?.counts.pendingAssignments ?? 0;
-  const pendingSubmissions = data?.counts.pendingSubmissions ?? 0;
-  const ungradedSubmissions = data?.counts.ungradedSubmissions ?? 0;
-  const attendanceToday = data?.today.attendance ?? 0;
-  const unreadNotifications = data?.unreadNotifications ?? 0;
-  const activeAcademicYear = data?.activeAcademicYear;
-  const recentActivities = data?.recentActivities ?? [];
+  const classes = data?.classes ?? [];
+  const courses = data?.courses ?? [];
+  const totalStudents = data?.totalStudents ?? 0;
+  const todayAttendance = data?.todayAttendance ?? 0;
+  const pendingAssignments = data?.pendingAssignments ?? 0;
+  const upcomingExams = data?.upcomingExams ?? 0;
 
   return (
     <DashboardShell role="TEACHER">
-      <div className="mb-8">
-        <p className="text-sm text-slate-500">Welcome back,</p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-          {user?.name}
-        </h2>
-        <p className="mt-1 text-slate-500">Teacher — {user?.school.name}</p>
-      </div>
+      <WelcomeHeader
+        name={user?.name ?? "Teacher"}
+        subtitle={`Teacher — ${user?.school?.name ?? ""}${
+          user?.teacher?.specialization
+            ? ` · ${user.teacher.specialization}`
+            : ""
+        }`}
+      />
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard
-          icon={<BookOpen size={22} />}
-          label="My Classes"
-          value={myClasses.toLocaleString()}
-          accent="blue"
-        />
-        <StatCard
-          icon={<Users size={22} />}
-          label="My Students"
-          value={myStudents.toLocaleString()}
-          trend="across all classes"
-          accent="teal"
-        />
-        <StatCard
-          icon={<ClipboardList size={22} />}
-          label="Pending Marks"
-          value={ungradedSubmissions.toLocaleString()}
-          trend="needs grading"
-          accent="amber"
-        />
-        <StatCard
-          icon={<CalendarDays size={22} />}
-          label="Today's Attendance"
-          value={attendanceToday.toLocaleString()}
-          trend={`${unreadNotifications} unread notifications`}
-          accent="violet"
-        />
-      </div>
-
-      <div className="mt-8 grid gap-5 lg:grid-cols-2">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900">Today's Overview</h3>
-
-          <div className="mt-5 space-y-3">
-            <div className="rounded-xl bg-slate-50 p-3">
-              <p className="text-sm text-slate-500">My Courses</p>
-              <p className="text-lg font-semibold text-slate-900">{myCourses.toLocaleString()}</p>
-            </div>
-            <div className="rounded-xl bg-slate-50 p-3">
-              <p className="text-sm text-slate-500">Pending Submissions</p>
-              <p className="text-lg font-semibold text-slate-900">{pendingSubmissions.toLocaleString()}</p>
-            </div>
-            <div className="rounded-xl bg-slate-50 p-3">
-              <p className="text-sm text-slate-500">Active Academic Year</p>
-              <p className="text-lg font-semibold text-slate-900">
-                {activeAcademicYear?.name ?? "Not set"}
-              </p>
-            </div>
-            <div className="rounded-xl bg-slate-50 p-3">
-              <p className="text-sm text-slate-500">Unread Notifications</p>
-              <p className="text-lg font-semibold text-slate-900">{unreadNotifications.toLocaleString()}</p>
-            </div>
+      {loading ? (
+        <LoadingState label="Loading your teaching dashboard…" />
+      ) : error ? (
+        <ErrorState error={error} />
+      ) : (
+        <>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <StatCard
+              icon={<Users size={22} />}
+              label="Students"
+              value={totalStudents.toLocaleString()}
+              trend="Across your classes"
+              accent="blue"
+            />
+            <StatCard
+              icon={<CalendarDays size={22} />}
+              label="Attendance Today"
+              value={`${todayAttendance} records`}
+              trend="Marked so far"
+              accent="teal"
+            />
+            <StatCard
+              icon={<ClipboardList size={22} />}
+              label="Pending Assignments"
+              value={pendingAssignments.toLocaleString()}
+              trend="Awaiting submissions"
+              accent="amber"
+            />
+            <StatCard
+              icon={<FileBarChart size={22} />}
+              label="Upcoming Exams"
+              value={upcomingExams.toLocaleString()}
+              trend="In the schedule"
+              accent="violet"
+            />
           </div>
-        </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900">Quick Actions</h3>
-
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {[
-              { label: "Enter Marks", icon: ClipboardList },
-              { label: "Take Attendance", icon: CalendarDays },
-              { label: "Create Assignment", icon: BookOpen },
-              { label: "My Students", icon: Users },
-            ].map((action) => {
-              const Icon = action.icon;
-
-              return (
-                <div
-                  key={action.label}
-                  className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4 transition hover:bg-blue-50 hover:border-blue-100"
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-slate-900">My Classes</h3>
+                <Link
+                  href="/dashboard/teacher/classes"
+                  className="flex items-center gap-1 text-sm text-primary-600 hover:text-primary-700"
                 >
-                  <Icon size={20} className="text-blue-600" />
-                  <span className="text-sm font-medium text-slate-700">
-                    {action.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+                  View all <ArrowRight size={14} />
+                </Link>
+              </div>
+              <div className="mt-4 space-y-3">
+                {classes.length === 0 ? (
+                  <p className="text-sm text-slate-400">
+                    No classes assigned yet.
+                  </p>
+                ) : (
+                  classes.slice(0, 6).map((item) => (
+                    <div
+                      key={item.id ?? item.name}
+                      className="flex items-center gap-3 rounded-xl border border-slate-100 p-3"
+                    >
+                      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
+                        <GraduationCap size={18} />
+                      </span>
+                      <div>
+                        <p className="text-sm font-medium text-slate-800">
+                          {item.name}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
 
-          <div className="mt-6 rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 p-4 text-white">
-            <div className="flex items-center gap-3">
-              <GraduationCap size={22} />
-              <div>
-                <p className="text-sm font-semibold">Your school</p>
-                <p className="text-xs text-blue-100">{user?.school.name}</p>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-slate-900">My Courses</h3>
+                <Link
+                  href="/dashboard/teacher/assignments"
+                  className="flex items-center gap-1 text-sm text-primary-600 hover:text-primary-700"
+                >
+                  Manage assignments <ArrowRight size={14} />
+                </Link>
+              </div>
+              <div className="mt-4 space-y-3">
+                {courses.length === 0 ? (
+                  <p className="text-sm text-slate-400">
+                    No courses assigned yet.
+                  </p>
+                ) : (
+                  courses.slice(0, 6).map((item) => (
+                    <div
+                      key={item.id ?? item.name}
+                      className="flex items-center gap-3 rounded-xl border border-slate-100 p-3"
+                    >
+                      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
+                        <ClipboardList size={18} />
+                      </span>
+                      <p className="text-sm font-medium text-slate-800">
+                        {item.name}
+                      </p>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </DashboardShell>
   );
 }

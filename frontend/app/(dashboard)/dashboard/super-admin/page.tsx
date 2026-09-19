@@ -10,6 +10,7 @@ import {
 
 import DashboardShell from "@/components/DashboardShell";
 import StatCard from "@/components/dashboard/StatCard";
+import WelcomeHeader from "@/components/dashboard/WelcomeHeader";
 import { useAuth } from "@/providers/auth-provider";
 import { getSuperAdminDashboard, type SuperAdminDashboardData } from "@/lib/auth";
 
@@ -56,26 +57,25 @@ export default function SuperAdminDashboardPage() {
 
   return (
     <DashboardShell role="SUPER_ADMIN">
-      <div className="mb-8">
-        <p className="text-sm text-slate-500">Welcome back,</p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-          {user?.name}
-        </h2>
-        <p className="mt-1 text-slate-500">
-          Super Admin — platform overview
-        </p>
-      </div>
+      <WelcomeHeader
+        name={user?.name ?? "Administrator"}
+        subtitle="Super Admin — platform overview"
+      />
 
-      <div className="mb-8 rounded-2xl bg-gradient-to-r from-blue-600 to-teal-600 p-6 text-white shadow-lg">
-        <div className="flex items-start gap-4">
-          <div className="rounded-xl bg-white/15 p-3">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 via-primary-600 to-secondary-500 p-6 text-white shadow-lg">
+        <div className="bg-noise pointer-events-none absolute inset-0" />
+        <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+        <div className="pointer-events-none absolute -bottom-20 right-24 h-40 w-40 rounded-full bg-secondary-400/30 blur-2xl" />
+
+        <div className="relative flex items-start gap-4">
+          <div className="rounded-xl bg-white/15 p-3 ring-1 ring-white/20">
             <Building2 size={28} />
           </div>
 
           <div>
-            <p className="text-sm text-blue-100">Platform</p>
+            <p className="text-sm text-white/75">Platform</p>
             <h3 className="mt-1 text-2xl font-bold">GyannPortal Fleet</h3>
-            <p className="mt-1 text-blue-100">
+            <p className="mt-1 text-white/75">
               All schools under the GyannPortal platform
             </p>
           </div>

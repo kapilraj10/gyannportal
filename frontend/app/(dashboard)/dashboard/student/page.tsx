@@ -1,173 +1,150 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
-  BookOpen,
+  ArrowRight,
   CalendarDays,
   ClipboardList,
+  FileBarChart,
   GraduationCap,
-  PiggyBank,
 } from "lucide-react";
 
-import DashboardShell from "@/components/DashboardShell";
-import StatCard from "@/components/dashboard/StatCard";
+import { studentsApi } from "@/lib/api";
 import { useAuth } from "@/providers/auth-provider";
-import { getStudentDashboard, type StudentDashboardData } from "@/lib/auth";
+import { formatDate } from "@/lib/format";
+
+import type { Student } from "@/types/domain";
+
+import DashboardShell from "@/components/DashboardShell";
+import WelcomeHeader from "@/components/dashboard/WelcomeHeader";
+import LoadingState from "@/components/common/LoadingState";
+import ErrorState from "@/components/common/ErrorState";
 
 export default function StudentDashboardPage() {
   const { user } = useAuth();
-  const [data, setData] = useState<StudentDashboardData | null>(null);
+  const [profile, setProfile] = useState<Student | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
-    async function fetchDashboard() {
-      try {
-        const dashboard = await getStudentDashboard();
-        setData(dashboard);
-      } catch (error) {
-        console.error("Failed to fetch student dashboard:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchDashboard();
+    void studentsApi
+      .getMyProfile()
+      .then(setProfile)
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <DashboardShell role="STUDENT">
-        <div className="flex min-h-[400px] items-center justify-center text-slate-500">
-          Loading dashboard...
-        </div>
-      </DashboardShell>
-    );
-  }
-
-  const student = data?.student;
-  const activeAcademicYear = data?.activeAcademicYear;
-  const totalAssignments = data?.counts.totalAssignments ?? 0;
-  const pendingAssignments = data?.counts.pendingAssignments ?? 0;
-  const upcomingExams = data?.counts.upcomingExams ?? 0;
-  const attendanceToday = data?.today.attendance ?? 0;
-  const unreadNotifications = data?.unreadNotifications ?? 0;
-  const upcomingExamsList = data?.upcomingExams ?? [];
-  const recentResults = data?.recentResults ?? [];
+  const stats = [
+    {
+      label: "Attendance",
+      value: "View",
+      href: "/dashboard/student/attendance",
+      icon: CalendarDays,
+      color: "text-primary-600 bg-primary-50",
+    },
+    {
+      label: "Assignments",
+      value: "View",
+      href: "/dashboard/student/assignments",
+      icon: ClipboardList,
+      color: "text-teal-600 bg-teal-50",
+    },
+    {
+      label: "Exams",
+      value: "View",
+      href: "/dashboard/student/exams",
+      icon: FileBarChart,
+      color: "text-amber-600 bg-amber-50",
+    },
+    {
+      label: "Marks",
+      value: "View",
+      href: "/dashboard/student/marks",
+      icon: FileBarChart,
+      color: "text-violet-600 bg-violet-50",
+    },
+  ];
 
   return (
     <DashboardShell role="STUDENT">
-      <div className="mb-8">
-        <p className="text-sm text-slate-500">Welcome back,</p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-          {student?.user.name ?? user?.name}
-        </h2>
-        <p className="mt-1 text-slate-500">
-          Student — {student?.enrollments[0]?.class.name ?? "Grade"} · {user?.school.name}
-        </p>
-      </div>
+      <WelcomeHeader
+        name={profile?.user?.name ?? user?.name ?? "Student"}
+        subtitle={`${profile?.class?.name ?? "Student"}${
+          profile?.section?.name ? ` · ${profile.section.name}` : ""
+        } — ${profile?.studentCode ?? ""}`}
+      />
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        <StatCard
-          icon={<GraduationCap size={22} />}
-          label="Current GPA"
-          value="3.62"
-          trend="improved +0.3"
-          accent="blue"
-        />
-        <StatCard
-          icon={<CalendarDays size={22} />}
-          label="Attendance"
-          value={`${attendanceToday} records today`}
-          trend={`${unreadNotifications} unread notifications`}
-          accent="teal"
-        />
-        <StatCard
-          icon={<PiggyBank size={22} />}
-          label="Fee Paid"
-          value="85%"
-          trend="next due: Dec 28"
-          accent="amber"
-        />
-        <StatCard
-          icon={<ClipboardList size={22} />}
-          label="Upcoming Exams"
-          value={upcomingExams.toLocaleString()}
-          accent="violet"
-        />
-      </div>
-
-      <div className="mt-8 grid gap-5 lg:grid-cols-2">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900">Upcoming Exams</h3>
-          <p className="mt-1 text-sm text-slate-500">
-            {upcomingExamsList.length > 0 ? upcomingExamsList[0].name : "No upcoming exams"}
-          </p>
-
-          <div className="mt-5 space-y-3">
-            {upcomingExamsList.slice(0, 5).map((exam) => (
-              <div
-                key={exam.id}
-                className="flex items-center gap-4 rounded-xl bg-slate-50 p-3"
-              >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-600 text-xs font-bold text-white">
-                  <ClipboardList size={16} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-slate-800">
-                    {exam.name}
-                  </p>
-                  <p className="text-xs text-slate-400">{exam.academicYear.name}</p>
-                </div>
-                <span className="text-xs text-slate-400">
-                  {new Date(exam.startDate).toLocaleDateString()}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 className="font-semibold text-slate-900">Recent Results</h3>
-          <p className="mt-1 text-sm text-slate-500">Latest exam results</p>
-
-          <div className="mt-5 space-y-3">
-            {recentResults.slice(0, 5).map((result) => (
-              <div
-                key={result.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-slate-100 p-3"
-              >
-                <div className="flex items-center gap-2.5">
-                  <BookOpen size={16} className="text-teal-600" />
-                  <div>
-                    <p className="text-sm font-medium text-slate-700">
-                      {result.exam.name}
-                    </p>
-                    <p className="text-xs text-slate-400">{result.subject.name}</p>
+      {loading ? (
+        <LoadingState />
+      ) : error ? (
+        <ErrorState error={error} />
+      ) : (
+        <>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {stats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <Link
+                  key={stat.label}
+                  href={stat.href}
+                  className="group relative overflow-hidden rounded-2xl border border-deep-100 bg-white p-5 card-shadow card-hover transition hover:border-primary-200"
+                >
+                  <span
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg ${stat.color}`}
+                  >
+                    <Icon size={20} />
+                  </span>
+                  <div className="mt-4 flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-slate-500">{stat.label}</p>
+                      <p className="text-lg font-bold text-slate-900">
+                        {stat.value}
+                      </p>
+                    </div>
+                    <ArrowRight
+                      size={16}
+                      className="text-slate-300 transition group-hover:translate-x-1 group-hover:text-primary-500"
+                    />
                   </div>
-                </div>
-                <div className="shrink-0">
-                  <span className="rounded-lg bg-blue-100 px-2.5 py-1 text-xs font-bold text-blue-700">
-                    {result.marks} / {result.grade ?? "—"}
-                  </span>
-                  <span className="shrink-0 text-xs text-amber-600">
-                    {result.publishedAt ? new Date(result.publishedAt).toLocaleDateString() : "Pending"}
-                  </span>
-                </div>
-              </div>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="mt-6 rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 p-4 text-white">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3">
-              <GraduationCap size={22} />
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary-600">
+                <GraduationCap size={22} />
+              </span>
               <div>
-                <p className="text-sm font-semibold">Your school</p>
-                <p className="text-xs text-blue-100">{user?.school.name}</p>
+                <p className="font-semibold text-slate-900">
+                  {profile?.user?.name ?? "Student"}
+                </p>
+                <p className="text-xs text-slate-400">
+                  {profile?.user?.email ?? ""}
+                </p>
               </div>
             </div>
+
+            <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {[
+                ["Class", profile?.class?.name ?? "—"],
+                ["Section", profile?.section?.name ?? "—"],
+                ["Admitted", profile?.admissionDate ? formatDate(profile.admissionDate) : "—"],
+                ["Guardian", profile?.guardianName ?? "—"],
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-xl bg-slate-50 p-3">
+                  <dt className="text-xs text-slate-400">{label}</dt>
+                  <dd className="mt-1 text-sm font-medium text-slate-800">
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </DashboardShell>
   );
 }

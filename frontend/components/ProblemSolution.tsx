@@ -1,113 +1,92 @@
-"use client";
+import Reveal from "./shared/Reveal";
+import SectionHeading from "./shared/SectionHeading";
 
-import { useEffect, useRef } from "react";
-
-function useInView(threshold = 0.1) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("animate-fade-up");
-          observer.unobserve(el);
-        }
-      },
-      { threshold }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
-  return ref;
-}
-
-const problems = [
-  "Too much paperwork",
-  "Scattered student records",
-  "Manual attendance tracking",
-  "Difficult fee tracking",
-  "Communication gaps between school and parents",
-  "Time-consuming report generation",
-];
-
-const solutions = [
-  "Digital-first workflows — zero paper",
-  "Centralized, secure student database",
-  "Real-time attendance with reports",
-  "Automated fee tracking & invoices",
-  "Instant announcements & notifications",
-  "One-click reports & analytics",
+const pairs = [
+  {
+    problem: "Bound by paperwork — registers, files and manual records",
+    solution: "Digital-first workflows — zero paper, everything online",
+  },
+  {
+    problem: "Data scattered across spreadsheets, apps and memory",
+    solution: "One centralized, secure student database",
+  },
+  {
+    problem: "Slow, error-prone attendance, fees and report generation",
+    solution: "Real-time attendance, automated fees, one-click reports",
+  },
+  {
+    problem: "Parents left disconnected from their child's progress",
+    solution: "Instant notifications and live progress for every parent",
+  },
 ];
 
 export default function ProblemSolution() {
-  const ref = useInView(0.1);
-
   return (
-    <section id="about" className="section-padding bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div ref={ref} className="text-center mb-16 opacity-0">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Everything your school needs.
-            <br />
-            <span className="gradient-text">One platform.</span>
-          </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            School management shouldn&apos;t be this hard. GyannPortal replaces
-            scattered tools and manual processes with one integrated system.
-          </p>
-        </div>
+    <section id="about" className="surface-gradient relative overflow-hidden py-20 md:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-noise" />
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
-          {/* Before - Problems */}
-          <div className="relative">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
-                <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-800">Without GyannPortal</h3>
-            </div>
-            <div className="space-y-3">
-              {problems.map((problem, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 p-4 bg-white rounded-xl border border-red-100 card-shadow"
-                >
-                  <svg className="w-5 h-5 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                  </svg>
-                  <span className="text-sm text-slate-600">{problem}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="container-px relative max-w-7xl">
+        <SectionHeading
+          badge="Why GyannPortal"
+          title={
+            <>
+              Traditional school management
+              <br />
+              <span className="gradient-text">was never this simple.</span>
+            </>
+          }
+          subtitle="Four everyday pain points. One intelligent platform that replaces them all."
+        />
 
-          {/* After - Solutions */}
-          <div className="relative">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
-                <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-800">With GyannPortal</h3>
-            </div>
-            <div className="space-y-3">
-              {solutions.map((solution, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 p-4 bg-white rounded-xl border border-emerald-100 card-shadow"
-                >
-                  <svg className="w-5 h-5 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-sm text-slate-600">{solution}</span>
+        <div className="mx-auto flex max-w-5xl flex-col gap-10 lg:gap-6">
+          {pairs.map((pair, index) => (
+            <div
+              key={pair.problem}
+              className="grid items-center gap-8 rounded-2xl lg:grid-cols-[1fr_64px_1fr] lg:gap-6"
+            >
+              {/* Problem */}
+              <Reveal delay={index * 60} y={18}>
+                <div className="flex items-start gap-4">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-deep-200 bg-white text-deep-400">
+                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </span>
+                  <p className="text-base font-medium leading-relaxed text-deep-500 sm:text-lg">
+                    {pair.problem}
+                  </p>
                 </div>
-              ))}
+              </Reveal>
+
+              {/* Connector */}
+              <div className="hidden lg:block">
+                <Reveal delay={index * 60 + 40}>
+                  <div className="relative flex items-center justify-center">
+                    <span className="h-px w-full bg-gradient-to-r from-deep-300 via-primary-300 to-accent-300" />
+                    <span className="absolute flex h-9 w-9 items-center justify-center rounded-full border border-deep-100 bg-white shadow-sm">
+                      <svg className="h-4 w-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 4l8 8-8 8m8-8H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* Solution */}
+              <Reveal delay={index * 60 + 40} y={18}>
+                <div className="flex items-start gap-4">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-sm">
+                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <p className="text-base font-semibold leading-relaxed text-deep-900 sm:text-lg">
+                    {pair.solution}
+                  </p>
+                </div>
+              </Reveal>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

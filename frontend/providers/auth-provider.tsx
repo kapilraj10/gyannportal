@@ -1,71 +1,87 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 import {
   getMe,
   login as loginApi,
   logout as logoutApi,
   registerSchool as registerSchoolApi,
-  LoginData,
-  RegisterSchoolData,
+  type LoginData,
+  type RegisterSchoolData,
 } from "@/lib/auth";
+import { getRefreshToken, getAccessToken, clearTokens } from "@/lib/token";
+import { hasPermission, type PermissionName } from "@/lib/permissions";
 
-import { clearAccessToken, getAccessToken } from "@/lib/token";
-
-import { User } from "@/types/auth";
+import type { User } from "@/types/auth";
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  isAuthenticated: boolean;
 
   login: (data: LoginData) => Promise<User>;
   registerSchool: (data: RegisterSchoolData) => Promise<User>;
   logout: () => Promise<void>;
+  refreshSession: () => Promise<boolean>;
+
+  /** `true` when the user holds any of the given roles. */
+  hasRole: (...roles: string[]) => boolean;
+  /** `true` when the user holds a specific permission. */
+  hasPermission: (permission: PermissionName) => boolean;
+  /** Alias of `hasPermission`. */
+  can: (permission: PermissionName) => boolean;
+  /** Reset local auth state (used by the refresh flow). */
+  handleUnauthorized: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const handleUnauthorized = () => {
-      clearAccessToken();
-      setUser(null);
-      router.replace("/login");
-    };
+  const handleSessionExpired = useCallback(() => {
+    clearTokens();
+    setUser(null);
+  }, []);
 
-    window.addEventListener("auth:unauthorized", handleUnauthorized);
+  useEffect(() => {
+    window.addEventListener("auth:session-expired", handleSessionExpired);
 
     return () => {
-      window.removeEventListener("auth:unauthorized", handleUnauthorized);
+      window.removeEventListener("auth:session-expired", handleSessionExpired);
     };
-  }, [router]);
+  }, [handleSessionExpired]);
+
+  // Bootstrap the session: prefer a valid access token, otherwise try a
+  // refresh (token rotation) before giving up.
+  const refreshSession = useCallback(async (): Promise<boolean> => {
+    try {
+      const me = await getMe();
+      setUser(me);
+      return true;
+    } catch {
+      // Fall through to the refresh flow handled by the API client.
+      return false;
+    }
+  }, []);
 
   useEffect(() => {
     let active = true;
 
-    const token = getAccessToken();
+    const hasStoredToken = !!getAccessToken() || !!getRefreshToken();
 
-    if (!token) {
-      queueMicrotask(() => {
-        if (active) setLoading(false);
-      });
-      return () => {
-        active = false;
-      };
+    if (!hasStoredToken) {
+      setLoading(false);
+      return;
     }
 
-    getMe()
-      .then((me) => {
-        if (active) setUser(me);
-      })
-      .catch(() => {
-        if (active) clearAccessToken();
+    refreshSession()
+      .then((ok) => {
+        if (!ok) {
+          clearTokens();
+        }
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -74,41 +90,57 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       active = false;
     };
-  }, []);
+  }, [refreshSession]);
 
-  async function handleLogin(data: LoginData) {
+  async function handleLogin(data: LoginData): Promise<User> {
     const response = await loginApi(data);
     setUser(response.user);
     return response.user;
   }
 
-  async function handleRegisterSchool(data: RegisterSchoolData) {
+  async function handleRegisterSchool(data: RegisterSchoolData): Promise<User> {
     const response = await registerSchoolApi(data);
     setUser(response.user);
     return response.user;
   }
 
-  async function handleLogout() {
-    await logoutApi();
-    setUser(null);
+  async function handleLogout(): Promise<void> {
+    try {
+      await logoutApi();
+    } finally {
+      clearTokens();
+      setUser(null);
+    }
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        login: handleLogin,
-        registerSchool: handleRegisterSchool,
-        logout: handleLogout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const checkRole = useCallback(
+    (...roles: string[]) => !!user && roles.includes(user.role),
+    [user],
   );
+
+  const checkPermission = useCallback(
+    (permission: PermissionName) => hasPermission(user, permission),
+    [user],
+  );
+
+  const value: AuthContextType = {
+    user,
+    loading,
+    isAuthenticated: !!user,
+    login: handleLogin,
+    registerSchool: handleRegisterSchool,
+    logout: handleLogout,
+    refreshSession,
+    hasRole: checkRole,
+    hasPermission: checkPermission,
+    can: checkPermission,
+    handleUnauthorized: handleSessionExpired,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export function useAuth() {
+export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
 
   if (!context) {

@@ -1,24 +1,9 @@
-import { AxiosError } from "axios";
+import { ApiError } from "@/types/api";
 
-function extractMessage(payload: unknown): string {
-  if (payload && typeof payload === "object" && "message" in payload) {
-    const message = (payload as { message: unknown }).message;
-
-    if (Array.isArray(message)) {
-      return message.map((item) => String(item)).join(", ");
-    }
-
-    if (typeof message === "string") {
-      return message;
-    }
-  }
-
-  return "";
-}
-
+/** Best-effort message extraction from any thrown value. */
 export function getErrorMessage(error: unknown): string {
-  if (error instanceof AxiosError) {
-    return extractMessage(error.response?.data);
+  if (error instanceof ApiError) {
+    return error.errors?.length ? error.errors.join(", ") : error.message;
   }
 
   if (error instanceof Error) {

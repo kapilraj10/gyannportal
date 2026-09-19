@@ -1,26 +1,10 @@
-export interface School {
-  id: string;
-  name: string;
-  code: string;
-  status?: string;
-}
+import type { User } from "./domain";
 
-export interface Branch {
-  id: string;
-  name: string;
-  address?: string | null;
-}
+export type { User } from "./domain";
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  phone?: string | null;
-  status?: string;
-  role: string;
-  schoolId: string;
-  school: School;
-  branch?: Branch | null;
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface AuthResponse {
@@ -28,4 +12,9 @@ export interface AuthResponse {
   accessToken: string;
   refreshToken?: string;
   user: User;
+}
+
+export interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken?: string;
 }

@@ -6,11 +6,12 @@ import {
   CalendarDays,
   GraduationCap,
   Users,
-  Wallet,
+  UsersRound,
 } from "lucide-react";
 
 import DashboardShell from "@/components/DashboardShell";
 import StatCard from "@/components/dashboard/StatCard";
+import WelcomeHeader from "@/components/dashboard/WelcomeHeader";
 import { useAuth } from "@/providers/auth-provider";
 import { getSchoolAdminDashboard, type SchoolAdminDashboardData } from "@/lib/auth";
 
@@ -60,28 +61,27 @@ export default function SchoolAdminDashboardPage() {
 
   return (
     <DashboardShell role="SCHOOL_ADMIN">
-      <div className="mb-8">
-        <p className="text-sm text-slate-500">Welcome back,</p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-          {user?.name}
-        </h2>
-        <p className="mt-1 text-slate-500">
-          School Administrator — manage your entire school
-        </p>
-      </div>
+      <WelcomeHeader
+        name={user?.name ?? "Administrator"}
+        subtitle="School Administrator — manage your entire school"
+      />
 
-      <div className="mb-8 rounded-2xl bg-gradient-to-r from-blue-600 to-teal-600 p-6 text-white shadow-lg">
-        <div className="flex items-start gap-4">
-          <div className="rounded-xl bg-white/15 p-3">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 via-primary-600 to-secondary-500 p-6 text-white shadow-lg">
+        <div className="bg-noise pointer-events-none absolute inset-0" />
+        <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
+        <div className="pointer-events-none absolute -bottom-20 right-24 h-40 w-40 rounded-full bg-secondary-400/30 blur-2xl" />
+
+        <div className="relative flex items-start gap-4">
+          <div className="rounded-xl bg-white/15 p-3 ring-1 ring-white/20">
             <GraduationCap size={28} />
           </div>
 
           <div>
-            <p className="text-sm text-blue-100">Your institution</p>
-            <h3 className="mt-1 text-2xl font-bold">{user?.school.name}</h3>
-            <p className="mt-1 text-blue-100">Code: {user?.school.code}</p>
+            <p className="text-sm text-white/75">Your institution</p>
+            <h3 className="mt-1 text-2xl font-bold">{user?.school?.name}</h3>
+            <p className="mt-1 text-white/75">Code: {user?.school?.code}</p>
             {user?.branch && (
-              <p className="mt-1 text-blue-100">Branch: {user.branch.name}</p>
+              <p className="mt-1 text-white/75">Branch: {user.branch.name}</p>
             )}
           </div>
         </div>
@@ -103,10 +103,10 @@ export default function SchoolAdminDashboardPage() {
           accent="teal"
         />
         <StatCard
-          icon={<Wallet size={22} />}
-          label="Fee Collection"
-          value="NPR 2.4M"
-          trend="89% collected"
+          icon={<UsersRound size={22} />}
+          label="Parents"
+          value={parents.toLocaleString()}
+          trend="Linked accounts"
           accent="amber"
         />
         <StatCard

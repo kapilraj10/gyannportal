@@ -1,13 +1,14 @@
-# GyannPortal — Frontend (Next.js Landing Page)
+# GyannPortal — Frontend
 
-The marketing landing page for GyannPortal — a premium School Management System.
+The GyannPortal web client: a marketing **landing page** plus **role-based dashboards** for super admins, school admins, teachers, students, and parents.
 
-**Stack:** Next.js 16 (App Router) · TypeScript (strict) · Tailwind CSS v4 · Geist font
+**Stack:** Next.js 16 (App Router) · TypeScript (strict) · Tailwind CSS v4 · `lucide-react` · axios · Geist font
 
 ## Getting Started
 
 ```bash
 npm install
+cp .env.local.example .env.local   # NEXT_PUBLIC_API_URL=http://localhost:8020/api/v1
 npm run dev          # http://localhost:3000
 ```
 
@@ -20,11 +21,11 @@ npm run lint
 
 ## What's Included
 
-A single-page marketing site with 14 sections:
+### Landing page (`app/page.tsx` + `components/*`)
 
 1. **Navbar** — fixed glass/blur navbar, mobile menu, Login + Get Started
 2. **Hero** — Nepali tagline, CTAs, dashboard mockup with floating cards
-3. **Stats** — animated counters (500+, 50+, 99.9%, 24/7)
+3. **Stats** — animated counters
 4. **Problem → Solution** — before/after comparison
 5. **Features** — 9-module responsive grid
 6. **Roles** — Admin / Teacher / Student / Parent cards
@@ -37,28 +38,47 @@ A single-page marketing site with 14 sections:
 13. **Final CTA** — gradient banner
 14. **Footer** — links, social icons, legal
 
+Plus an **AuthModal** (login / register school) wired to the API.
+
+### Auth & dashboards
+
+- `app/(auth)/login` and `app/(auth)/register-school` — real API-backed forms.
+- `app/(dashboard)/dashboard/**` — role dashboards behind `DashboardShell` (permission-filtered sidebar, sticky glass header, `NotificationBell`):
+  - **super-admin**: overview, schools (CRUD), users, audit logs, notifications, settings
+  - **school-admin**: overview + 13 full CRUD pages (students, teachers, parents, classes, sections, subjects, courses, academic-years, enrollments, branches, exams, assignments, results), attendance marking, audit logs, notifications, settings
+  - **teacher**: overview, classes, students, attendance, assignments, marks, exams, notifications, settings
+  - **student**: overview, classes, attendance, assignments (submit answer), exams, marks, notifications, settings
+  - **parent**: overview, children + per-child detail, attendance/assignments/exams/results (child selector), notifications, settings
+
 ## Project Layout
 
 ```
-app/
-├── globals.css      # Tailwind v4 theme tokens, keyframes, utilities
-├── layout.tsx       # Metadata (SEO), fonts, root shell
-└── page.tsx         # Composes all sections (server component)
-components/          # One file per section + Navbar/Footer
-public/
-└── logo1.png        # Brand logo used site-wide
+app/                    # routes: landing, (auth)/*, (dashboard)/dashboard/{role}/...
+components/             # landing sections, dashboard layout, crud, common, auth, settings, notifications, parent
+lib/api/                # axios client + typo-safe helpers + per-resource API modules
+lib/                    # auth, token, roles, permissions, constants, errors, format
+types/                  # api / auth / domain / table
+providers/auth-provider.tsx   # AuthProvider context + useAuth()
+hooks/                  # use-auth, use-pagination, use-parent-children, use-select-options
+public/logo1.png        # Brand logo used site-wide
 ```
+
+## Key Mechanics
+
+- **API client** (`lib/api/client.ts`): attaches the bearer token, and on `401` performs a **single-flight refresh** via `POST /auth/refresh` then replays the request; emits `auth:session-expired` and clears tokens on failure.
+- **Tokens**: access token in memory + `sessionStorage`, refresh token in `sessionStorage` (backend issues tokens in the body, not cookies — no `localStorage`).
+- **RBAC**: `lib/permissions.ts` role/permission matrix consumed by `usePermission`/`Can`; the backend `PermissionsGuard` stays authoritative.
+- **Generic CRUD**: `components/crud/CrudPage.tsx` drives most admin tables (search, pagination, create/edit modal, delete confirm).
+- **Route guard**: `DashboardShell` checks role and redirects via `getDashboardRoute(user)`.
 
 ## Styling
 
-- Brand colors defined in `globals.css` `@theme inline`:
-  Primary `#2563EB`, Secondary `#0F766E`, Accent `#14B8A6`,
-  Background `#F8FAFC`, Text `#0F172A`, plus success/warning/error scales.
-- Custom utilities: `.gradient-text`, `.card-shadow`, `.glass`, `.section-padding`.
-- Icons are inline SVGs (no icon library dependency).
+- Brand colors in `globals.css` `@theme inline`: Primary `#2563EB`, Secondary `#0F766E`, Accent `#14B8A6`, plus success/warning/error scales.
+- Custom utilities: `.gradient-text`, `.card-shadow`, `.glass`, `.section-padding`, `animate-fade-up`, `animate-float`.
+- Icons via `lucide-react`; landing scroll-reveal via `IntersectionObserver` (`components/shared/Reveal.tsx`, respects `prefers-reduced-motion`).
 
 ## Notes
 
-- Interactive components use `"use client"`; the page itself stays a server component.
-- Scroll-reveal animations use `IntersectionObserver`.
-- All images (including the logo) go through `next/image`.
+- Landing page is a **client component** composing `"use client"` sections — not a server component.
+- All images go through `next/image`.
+- `AGENTS.md` is auto-generated by Next.js 16 dev (see `node_modules/next/dist/docs/` for breaking-change guidance before editing).

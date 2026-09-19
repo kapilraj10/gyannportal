@@ -12,7 +12,7 @@
 - Tailwind CSS v4 utility classes; custom tokens in `@theme inline` inside `globals.css`.
 - Components live in `components/`, pages in `app/`.
 - Use `next/image` for all images (never a plain `<img>`).
-- Mark interactive components with `"use client"`; keep the page server component.
+- Mark interactive components with `"use client"`; the landing page (`app/page.tsx`) is client-side and composes client sections.
 - Semantic HTML (`header`, `nav`, `main`, `section`, `footer`, `button`, `a`).
 - Add `aria-*` attributes for interactive elements; unique React keys at all times.
 - Scroll animations via `IntersectionObserver` helpers inside components.

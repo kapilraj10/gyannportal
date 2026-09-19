@@ -65,7 +65,7 @@
 
 ## 7. Imagery & Icons
 
-- Inline **SVG** icons (Heroicons-style stroke icons) — no external icon library.
+- Icons via **`lucide-react`** (stroke icons); landing scroll-reveal via `IntersectionObserver` in `components/shared/Reveal.tsx`.
 - Logo file: `frontend/public/logo1.png` (used across navbar, dashboards, footer).
 - Dashboard mockups are hand-built with Tailwind, not screenshots.
 
